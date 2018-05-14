@@ -1,7 +1,9 @@
+using Core.Services.ResponseModels;
+
 namespace Core.Interfaces
 {
     public interface IUsuariosService
     {
-          bool autenticarUsuario(string username, string password);
+          LoginResponseApi autenticarUsuario(string username, string password);
     }
 }

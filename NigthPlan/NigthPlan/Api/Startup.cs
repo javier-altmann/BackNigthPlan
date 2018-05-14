@@ -33,6 +33,8 @@ namespace Api
             var connection = Configuration.GetConnectionString("NigthPlanMysql");      
             services.AddDbContext<nigthPlanContext>(options => options.UseMySql(connection));
             services.AddScoped<IGruposService, GruposService>();
+            services.AddScoped<IEstablecimientosService, EstablecimientosService>();
+            services.AddScoped<IUsuariosService, UsuariosService>();
             
         }
 

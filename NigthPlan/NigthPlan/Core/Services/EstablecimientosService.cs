@@ -2,51 +2,22 @@ using DAL.Interfaces;
 using DAL.Model;
 using Core.DTO;
 using Core.Interfaces;
-using Core.Services.Mock;
 using System.Collections.Generic;
 using Core.Services.ResponseModels;
 using System.Linq;
 namespace Core.Services
 {
-    public class EstablecimientosService //: IEstablecimientosService
+    public class EstablecimientosService : IEstablecimientosService
     {
-       // private IBaseDAO<Establecimientos> establecimientosDAO;
-        public EstablecimientoDTO Establecimiento { get; set; }
-
-        List<EstablecimientosMock> establecimientos = new List<EstablecimientosMock>(){
-            new EstablecimientosMock(){
-                IdEstablecimiento = 1,
-                Nombre = "Heisemburger",
-                Imagen = "hes.png",
-                Direccion = "Palermo 23",
-                Destacado = 1,
-            },
-            new EstablecimientosMock(){
-                IdEstablecimiento = 2,
-                Nombre = "Junior",
-                Imagen = "junior.png",
-                Direccion = "Malabia",
-                Destacado = 1,
-            },
-            new EstablecimientosMock(){
-                IdEstablecimiento = 3,
-                Nombre = "Share",
-                Imagen = "share.png",
-                Direccion = "Araoz",
-                Destacado = 0,
-            },
-        };
-
-      //  public EstablecimientosService(IBaseDAO<Establecimientos> establecimientosDAO)
-        public EstablecimientosService()
+        private nigthPlanContext context;
+        public EstablecimientosService(nigthPlanContext context)
         {
-            //this.establecimientosDAO = establecimientosDAO;
-            Establecimiento = null;
+            this.context = context;
         }
 
-        public List<EstablecimientoDTO> getEstablecimientosDestacados(int offset, int limit){
+        public OperationResult<IEnumerable<EstablecimientoDTO>> getEstablecimientosDestacados(int offset, int limit){
             
-            var establecimientosDestacados = establecimientos.Where(x=> x.Destacado == 1)
+            var establecimientosDestacados = context.Establecimientos.Where(x=> x.Destacado == 1)
                                             .Select(y=> new EstablecimientoDTO{
                                                 IdEstablecimiento = y.IdEstablecimiento,
                                                 Nombre = y.Nombre,
@@ -56,17 +27,16 @@ namespace Core.Services
                                             }).OrderBy(ordenar=>ordenar.IdEstablecimiento)
                                             .Take(limit).Skip(offset).ToList();
             //Cambiar el harcode de Take y Skip. Hacer una clase paginacion
-           
+             var operationResult = new OperationResult<IEnumerable<EstablecimientoDTO>>();
+   
           
             if(!establecimientosDestacados.Any()){
-               // return establecimientosDestacados;
-           
+                return operationResult;
             }
             
-            return establecimientosDestacados;
+            return operationResult;
         }
-        
-        
-        
+
+      
     }
 }

@@ -5,12 +5,12 @@ using Microsoft.AspNetCore.Mvc;
 namespace Api.Controllers
 {
     [Route("api/[controller]")]
-    public class UsuariosController : Controller
+    public class EstablecimientosController : Controller
     {
-        IUsuariosService _usuarios;
-        public UsuariosController(IUsuariosService usuarios)
+          IEstablecimientosService _establecimientos;
+        public EstablecimientosController(IEstablecimientosService establecimientos)
         {
-            _usuarios = usuarios;
+            _establecimientos = establecimientos;
         }
 
         // GET api/values

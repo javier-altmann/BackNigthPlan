@@ -4,7 +4,6 @@ using DAL.Model;
 using Core.DTO;
 using Core.Interfaces;
 using System.Linq;
-using Core.Services.Mock;
 using Core.Services.ResponseModels;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,14 +11,12 @@ namespace Core.Services
 {
     public class GruposService : IGruposService
     {
-       
         private nigthPlanContext context;
         public GruposService(nigthPlanContext context){
             
             this.context = context;
         }
         
-      
         public OperationResult<IEnumerable<GruposDelUsuarioDTO>> GetGruposDelUsuario(int id_usuario, int limit, int offset)
         {
                 var gruposDelUsuarioFiltrados = context.Usuarios

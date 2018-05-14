@@ -1,13 +1,12 @@
 using DAL.Interfaces;
 using Core.DTO;
 using Core.Services.ResponseModels;
+using System.Collections.Generic;
 
 namespace Core.Interfaces
 {
     public interface IEstablecimientosService
     {
-        EstablecimientoDTO Establecimiento { get; set; }    
-
-        EstablecimientoDTO getEstablecimientosDestacados();
+         OperationResult<IEnumerable<EstablecimientoDTO>> getEstablecimientosDestacados(int offset, int limit);
     }
 }

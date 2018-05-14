@@ -5,18 +5,19 @@ using Microsoft.AspNetCore.Mvc;
 namespace Api.Controllers
 {
     [Route("api/[controller]")]
-    public class UsuariosController : Controller
+    public class GruposController : Controller
     {
-        IUsuariosService _usuarios;
-        public UsuariosController(IUsuariosService usuarios)
+        IGruposService _grupos;
+        public GruposController(IGruposService grupos)
         {
-            _usuarios = usuarios;
+            _grupos = grupos;
         }
 
         // GET api/values
         [HttpGet]
         public IEnumerable<string> Get()
         {
+          
             return new  string[] { "value1", "value2" };
         }
 

@@ -100,11 +100,8 @@ namespace Core.Services
                 return operationResult;
             }
 
-            OperationResult<GruposDelUsuarioDTO> op = new OperationResult<GruposDelUsuarioDTO>();
-
             return operationResult;
  
-   
         }
         
     }

@@ -7,7 +7,7 @@ namespace Api.Controllers
     [Route("api/[controller]")]
     public class EstablecimientosController : Controller
     {
-          IEstablecimientosService _establecimientos;
+        IEstablecimientosService _establecimientos;
         public EstablecimientosController(IEstablecimientosService establecimientos)
         {
             _establecimientos = establecimientos;
@@ -15,12 +15,10 @@ namespace Api.Controllers
 
         // GET api/values
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult GetEstablecimientosDestacados()
         {
-            return new  string[] { "value1", "value2" };
+            return null;
         }
-
-
 
         // GET api/values/5
         [HttpGet("{id}")]
@@ -31,19 +29,20 @@ namespace Api.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody]string value)
+        public void CrearEstablecimiento([FromBody]string value)
         {
+
         }
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public void ActualizarEstablecimientos(int id, [FromBody]string value)
         {
         }
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public void EliminarEstablecimientos(int id)
         {
         }
         

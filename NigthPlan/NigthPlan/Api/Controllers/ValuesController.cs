@@ -27,6 +27,7 @@ namespace Api.Controllers
         {
           var gruposDelUsuario =  _grupos.GetGruposDelUsuario(1,10,0);
           var buscador = _grupos.GetSearchGroups(1,"ra",10,0);
+          var usuariosDelGrupo = _grupos.GetUsuariosDelGrupos(1);
             
             return new  string[] { "value1", "value2" };
         }

@@ -42,7 +42,6 @@ namespace Core.Services
                 operationResult.ObjectResult = gruposDelUsuarioFiltrados;
                 return operationResult;
             }
-            OperationResult<GruposDelUsuarioDTO> op = new OperationResult<GruposDelUsuarioDTO>();
 
              return operationResult;
     
@@ -51,9 +50,19 @@ namespace Core.Services
 
         public OperationResult<IEnumerable<UsuarioDelGrupoDTO>> GetUsuariosDelGrupos(int id_grupo)
         {
-            /*
-            var usuariosDelGrupo = usuariosList.Where(x => x.IdGrupo == id_grupo).ToList();
-            var operationResult = new OperationResult<IEnumerable<UsuarioDelGrupoDTO>>();
+            var usuariosDelGrupo = context.Grupos.Where(x=> x.IdGrupo == id_grupo)
+                                          .Include(x=> x.GruposUsuarios)
+                                          .SelectMany(x=> x.GruposUsuarios)
+                                          .Include(x=> x.IdUsuariosNavigation)
+                                          .Select(x=> new UsuarioDelGrupoDTO(){
+                                            IdUsuario = x.IdUsuariosNavigation.IdUsuario,
+                                            Nombre = x.IdUsuariosNavigation.Nombre,
+                                            Apellido = x.IdUsuariosNavigation.Apellido,
+                                            ImagenPerfil = x.IdUsuariosNavigation.ImagenPerfil  
+                                          }).OrderBy(x=> x.IdUsuario).ToList();
+
+
+          var operationResult = new OperationResult<IEnumerable<UsuarioDelGrupoDTO>>();
             if (usuariosDelGrupo.Any())
             {
                 operationResult.ObjectResult = usuariosDelGrupo;
@@ -61,8 +70,7 @@ namespace Core.Services
             }
 
             return operationResult;
-*/
-            return null;
+
         }
 
         public OperationResult<IEnumerable<GruposDelUsuarioDTO>> GetSearchGroups(int id_usuario, string search, int limit, int offset)

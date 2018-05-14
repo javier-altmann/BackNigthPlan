@@ -6,8 +6,6 @@ namespace Core.DTO
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public string ImagenPerfil { get; set; }
-//Borrarlo cuando pueda traer datos desde la base.
-        public int IdGrupo {get; set; }
 
     }
 }

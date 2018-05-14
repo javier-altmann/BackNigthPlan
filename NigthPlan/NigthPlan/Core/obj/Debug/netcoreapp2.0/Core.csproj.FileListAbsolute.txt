@@ -20,3 +20,14 @@
 /home/javier/Api-Net-Core/NigthPlan/NigthPlan/Core/obj/Debug/netcoreapp2.0/Core.csproj.CopyComplete
 /home/javier/Api-Net-Core/NigthPlan/NigthPlan/Core/obj/Debug/netcoreapp2.0/Core.dll
 /home/javier/Api-Net-Core/NigthPlan/NigthPlan/Core/obj/Debug/netcoreapp2.0/Core.pdb
+/home/javier/BackNigthPlan/NigthPlan/NigthPlan/Core/bin/Debug/netcoreapp2.0/Core.deps.json
+/home/javier/BackNigthPlan/NigthPlan/NigthPlan/Core/bin/Debug/netcoreapp2.0/Core.dll
+/home/javier/BackNigthPlan/NigthPlan/NigthPlan/Core/bin/Debug/netcoreapp2.0/Core.pdb
+/home/javier/BackNigthPlan/NigthPlan/NigthPlan/Core/bin/Debug/netcoreapp2.0/DAL.dll
+/home/javier/BackNigthPlan/NigthPlan/NigthPlan/Core/bin/Debug/netcoreapp2.0/DAL.pdb
+/home/javier/BackNigthPlan/NigthPlan/NigthPlan/Core/obj/Debug/netcoreapp2.0/Core.csproj.CoreCompileInputs.cache
+/home/javier/BackNigthPlan/NigthPlan/NigthPlan/Core/obj/Debug/netcoreapp2.0/Core.AssemblyInfoInputs.cache
+/home/javier/BackNigthPlan/NigthPlan/NigthPlan/Core/obj/Debug/netcoreapp2.0/Core.AssemblyInfo.cs
+/home/javier/BackNigthPlan/NigthPlan/NigthPlan/Core/obj/Debug/netcoreapp2.0/Core.csproj.CopyComplete
+/home/javier/BackNigthPlan/NigthPlan/NigthPlan/Core/obj/Debug/netcoreapp2.0/Core.dll
+/home/javier/BackNigthPlan/NigthPlan/NigthPlan/Core/obj/Debug/netcoreapp2.0/Core.pdb

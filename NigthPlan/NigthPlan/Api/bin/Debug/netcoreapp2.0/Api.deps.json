@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.0",
-    "signature": "6cb1bd05bec066cc62eac6660bd85793ee2703b2"
+    "signature": "66bb808bde67068e80a690c32e905524110067d4"
   },
   "compilationOptions": {
     "defines": [
@@ -27,7 +27,8 @@
           "Microsoft.AspNetCore.All": "2.0.5",
           "Microsoft.NETCore.App": "2.0.0",
           "Pomelo.EntityFrameworkCore.MySql": "2.0.1",
-          "Pomelo.EntityFrameworkCore.MySql.Design": "1.1.2"
+          "Pomelo.EntityFrameworkCore.MySql.Design": "1.1.2",
+          "dotnet-aspnet-codegenerator": "2.1.0-rc1-final"
         },
         "runtime": {
           "Api.dll": {}
@@ -36,6 +37,7 @@
           "Api.dll": {}
         }
       },
+      "dotnet-aspnet-codegenerator/2.1.0-rc1-final": {},
       "Libuv/1.10.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "2.0.0"
@@ -4126,6 +4128,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "dotnet-aspnet-codegenerator/2.1.0-rc1-final": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-hgDVUwyDIld86ZwmxLmgXsr0zoaVxE4ms1Z6PQBCY2O0fHk6k56g6pesLpTrqB4o5px+HLwnZ2Q3RIT114qLTw==",
+      "path": "dotnet-aspnet-codegenerator/2.1.0-rc1-final",
+      "hashPath": "dotnet-aspnet-codegenerator.2.1.0-rc1-final.nupkg.sha512"
     },
     "Libuv/1.10.0": {
       "type": "package",

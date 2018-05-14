@@ -2,6 +2,9 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v2.0": {
+      "dotnet-aspnet-codegenerator/2.1.0-rc1-final": {
+        "type": "package"
+      },
       "Libuv/1.10.0": {
         "type": "package",
         "dependencies": {
@@ -4916,6 +4919,37 @@
     }
   },
   "libraries": {
+    "dotnet-aspnet-codegenerator/2.1.0-rc1-final": {
+      "sha512": "hgDVUwyDIld86ZwmxLmgXsr0zoaVxE4ms1Z6PQBCY2O0fHk6k56g6pesLpTrqB4o5px+HLwnZ2Q3RIT114qLTw==",
+      "type": "package",
+      "path": "dotnet-aspnet-codegenerator/2.1.0-rc1-final",
+      "files": [
+        ".signature.p7s",
+        "dotnet-aspnet-codegenerator.2.1.0-rc1-final.nupkg.sha512",
+        "dotnet-aspnet-codegenerator.nuspec",
+        "tools/netcoreapp2.1/any/DotnetToolSettings.xml",
+        "tools/netcoreapp2.1/any/Microsoft.Extensions.FileProviders.Abstractions.dll",
+        "tools/netcoreapp2.1/any/Microsoft.Extensions.FileProviders.Physical.dll",
+        "tools/netcoreapp2.1/any/Microsoft.Extensions.FileSystemGlobbing.dll",
+        "tools/netcoreapp2.1/any/Microsoft.Extensions.Primitives.dll",
+        "tools/netcoreapp2.1/any/Microsoft.VisualStudio.Web.CodeGeneration.Contracts.dll",
+        "tools/netcoreapp2.1/any/Microsoft.VisualStudio.Web.CodeGeneration.Contracts.xml",
+        "tools/netcoreapp2.1/any/Newtonsoft.Json.dll",
+        "tools/netcoreapp2.1/any/NuGet.Frameworks.dll",
+        "tools/netcoreapp2.1/any/System.Runtime.CompilerServices.Unsafe.dll",
+        "tools/netcoreapp2.1/any/build/microsoft.visualstudio.web.codegeneration.tools.targets",
+        "tools/netcoreapp2.1/any/buildMultiTargeting/microsoft.visualstudio.web.codegeneration.tools.targets",
+        "tools/netcoreapp2.1/any/dotnet-aspnet-codegenerator.deps.json",
+        "tools/netcoreapp2.1/any/dotnet-aspnet-codegenerator.dll",
+        "tools/netcoreapp2.1/any/dotnet-aspnet-codegenerator.runtimeconfig.json",
+        "tools/netcoreapp2.1/any/dotnet-aspnet-codegenerator.xml",
+        "tools/netcoreapp2.1/any/shims/osx-x64/dotnet-aspnet-codegenerator",
+        "tools/netcoreapp2.1/any/shims/win-x64/dotnet-aspnet-codegenerator.exe",
+        "tools/netcoreapp2.1/any/shims/win-x86/dotnet-aspnet-codegenerator.exe",
+        "tools/netcoreapp2.1/any/toolassets/net461/Microsoft.VisualStudio.Web.CodeGeneration.Msbuild.dll",
+        "tools/netcoreapp2.1/any/toolassets/netcoreapp2.1/Microsoft.VisualStudio.Web.CodeGeneration.Msbuild.dll"
+      ]
+    },
     "Libuv/1.10.0": {
       "sha512": "GsCf4q+eyaI49rCPlgYxdxa1SQCysXFFdSJWdstrwxytg4+VPYLYrXD4AT2rjHVJ+UF7SSWX9CapWEYaU4ejVQ==",
       "type": "package",
@@ -12872,7 +12906,8 @@
       "Microsoft.AspNetCore.All >= 2.0.5",
       "Microsoft.NETCore.App >= 2.0.0",
       "Pomelo.EntityFrameworkCore.MySql >= 2.0.1",
-      "Pomelo.EntityFrameworkCore.MySql.Design >= 1.1.2"
+      "Pomelo.EntityFrameworkCore.MySql.Design >= 1.1.2",
+      "dotnet-aspnet-codegenerator >= 2.1.0-rc1-final"
     ]
   },
   "packageFolders": {
@@ -12934,6 +12969,10 @@
           "Pomelo.EntityFrameworkCore.MySql.Design": {
             "target": "Package",
             "version": "[1.1.2, )"
+          },
+          "dotnet-aspnet-codegenerator": {
+            "target": "Package",
+            "version": "[2.1.0-rc1-final, )"
           }
         },
         "imports": [

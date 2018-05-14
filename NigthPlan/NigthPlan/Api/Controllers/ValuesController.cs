@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Core.DTO;
+using Core.Interfaces;
 using Core.Services;
 using Core.Services.ResponseModels;
 using DAL.Model;
@@ -14,47 +15,19 @@ namespace Api.Controllers
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
-        
+        IGruposService _grupos;
+        public ValuesController(IGruposService grupos)
+        {
+            _grupos = grupos;
+        }
 
         // GET api/values
         [HttpGet]
         public IEnumerable<string> Get()
         {
+          var gruposDelUsuario =  _grupos.GetGruposDelUsuario(1,10,0);
+          var buscador = _grupos.GetSearchGroups(1,"ra",10,0);
             
-            using (var context = new nigthPlanContext())
-            {
-                var gruposDelUsuario = context.Usuarios
-                   .Where(x => x.IdUsuario == 1)
-                   .Include(x => x.GruposUsuarios)
-                   .SelectMany(x => x.GruposUsuarios)
-                   .Include(x => x.IdGrupoNavigation)
-                   .Select(x => new GruposDelUsuarioDTO(){
-                       IdGrupo = x.IdGrupoNavigation.IdGrupo,
-                       FechaCreacion = x.IdGrupoNavigation.FechaCreacion,
-                       Nombre = x.IdGrupoNavigation.Nombre,
-                       ImagenPerfil = x.IdGrupoNavigation.Imagen
-
-                   }).ToList();
-             }
-            
-            /* 
-        
-            GruposService grupos = new GruposService();
-            
-            
-            var resultado =  grupos.GetSearchGroups(1,"bo",10,0);
-           */
-
-            
-            /* 
-           UsuariosService test = new UsuariosService();
-           var validacionUsuario =  test.autenticarUsuario("avier.altmann","javier");
-           */
-         /*   EstablecimientosService establecimiento = new EstablecimientosService();
-            var test = establecimiento.getEstablecimientosDestacados(10,5);
-            */
-            
-            //var test = grupos.GetGruposDelUsuario(2,10,0);
             return new  string[] { "value1", "value2" };
         }
 

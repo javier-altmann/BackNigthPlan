@@ -10,9 +10,9 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/NigthPlan/Api/bin/Debug/netcoreapp2.0/Api.dll",
+            "program": "${workspaceFolder}/NightPlan/Api/bin/Debug/netcoreapp2.0/Api.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/NigthPlan/Api",
+            "cwd": "${workspaceFolder}/NightPlan/Api",
             "stopAtEntry": false,
             "internalConsoleOptions": "openOnSessionStart",
             "launchBrowser": {

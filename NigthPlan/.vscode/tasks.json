@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/NigthPlan/Api/Api.csproj"
+                "${workspaceFolder}/NightPlan/Api/Api.csproj"
             ],
             "problemMatcher": "$msCompile"
         }

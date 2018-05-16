@@ -15,6 +15,7 @@ namespace Core.Services
             this.context = context;
         }
 
+
         public OperationResult<IEnumerable<EstablecimientoDTO>> getEstablecimientosDestacados(int offset, int limit){
             
             var establecimientosDestacados = context.Establecimientos.Where(x=> x.Destacado == 1)
@@ -34,6 +35,38 @@ namespace Core.Services
             }
             return operationResult;
         }
-      
+
+        public IEnumerable<GastronomiaDTO> GetGastronomia()
+        {
+            var gastronomia = context.Gastronomia.Select(x=> new GastronomiaDTO(){
+                IdGastronomia = x.IdGastronomia,
+                Nombre = x.Nombre
+            }).ToList();
+            return gastronomia;
+        }
+
+        public IEnumerable<BarrioDTO> GetBarrios()
+        {
+            var barrios = context.Barrios.Select(x=> new BarrioDTO(){
+                IdBarrio = x.IdBarrio,
+                Nombre = x.Nombre
+            }).ToList();
+
+            return barrios;
+        }
+
+        public IEnumerable<CaracteristicasDTO> GetCaracteristicas()
+        {
+            var caracteristicas = context.Caracteristicas.Select(x=> new CaracteristicasDTO(){
+                IdCaracteristicas = x.IdCaracteristica,
+                Nombre = x.Nombre
+            }).ToList();
+            return caracteristicas;
+        }
+
+       
+
+
+
     }
 }

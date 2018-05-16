@@ -8,6 +8,14 @@ namespace Core.Services
 {
     public class RecomendacionesService : IRecomendadosService
     {
+
+        /* Guardar un atributo en la tabla que contenga la cantidad de usuarios que responden la preferencia
+         en el grupo. Hacer una query que agarre ese atributo y le sume 1 cuando el nuevo usuario responde.
+         EJ: Atributo tiene 1. El método busca que hay 1, le suma 1 y inserta 2. 
+         Esto se hace cada vez que un usuario elige sus preferencias. 
+         ---id_grupo contador_preferencias_elegidas  cantidad_usuarios_por_grupo---
+         También cuando se crea un grupo guardo la cantidad de persona que hay en la misma tabla. 
+        */
         private nightPlanContext context;
         public RecomendacionesService(nightPlanContext context)
         {

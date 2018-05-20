@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Core.Interfaces;
 using Core.Services;
 using DAL.Model;
+//using DAL.Model;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;

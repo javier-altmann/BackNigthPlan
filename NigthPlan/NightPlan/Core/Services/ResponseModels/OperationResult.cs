@@ -13,20 +13,3 @@ namespace Core.Services.ResponseModels
     }
 }
 
-
-
-/*
-y en el controller devolverías un 
-OperationResult, y en este caso T = List<EstablecimientoDTO> 
-o List<EstablecimientoViewModel> sería más correcto
-
-OperationResult<MiDto> _datosDelServicio; 
-
-Adentro del controller:
-_datosDelServicio.ObjectResult = elMetodoQueTraeDatos();
-if(!_datosDelServicio.ObjectResult){
-    return _datosDelServicio.Message;
-}
-return _datosDelServicio.ObjectResult;
-
- */

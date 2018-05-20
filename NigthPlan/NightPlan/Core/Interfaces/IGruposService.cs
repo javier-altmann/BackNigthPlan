@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using DAL.Model;
+using Core.DTO.CrearGrupo;
 using Core.DTO;
 using Core.Services.ResponseModels;
 
@@ -18,5 +18,9 @@ namespace Core.Interfaces
         OperationResult<IEnumerable<GruposDelUsuarioDTO>> GetSearchGroups(int id_usuario, string search, int limit, int offset);
     
         OperationResult<IEnumerable<UsuarioDTO>> getUsuarios(string email);
+
+        void CrearGrupo(CrearGrupoUsuarioDTO participante,CrearGrupoDTO grupo);
+
+       
     }
 }

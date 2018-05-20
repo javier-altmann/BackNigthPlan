@@ -12,6 +12,7 @@ namespace DAL.Model
         public virtual DbSet<EstablecimientoCaracteristicas> EstablecimientoCaracteristicas { get; set; }
         public virtual DbSet<Establecimientos> Establecimientos { get; set; }
         public virtual DbSet<EstablecimientosGastronomia> EstablecimientosGastronomia { get; set; }
+        public virtual DbSet<EstadoDePreferencias> EstadoDePreferencias { get; set; }
         public virtual DbSet<Gastronomia> Gastronomia { get; set; }
         public virtual DbSet<Grupos> Grupos { get; set; }
         public virtual DbSet<GruposUsuarios> GruposUsuarios { get; set; }
@@ -19,11 +20,9 @@ namespace DAL.Model
         public virtual DbSet<Usuarios> Usuarios { get; set; }
         public virtual DbSet<UsuariosAdministradores> UsuariosAdministradores { get; set; }
         public virtual DbSet<Votaciones> Votaciones { get; set; }
-
-        public nightPlanContext(DbContextOptions<nightPlanContext> options)
+         public nightPlanContext(DbContextOptions<nightPlanContext> options)
             : base(options)
         { }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Barrios>(entity =>
@@ -189,6 +188,37 @@ namespace DAL.Model
                     .WithMany(p => p.EstablecimientosGastronomia)
                     .HasForeignKey(d => d.IdGastronomia)
                     .HasConstraintName("FK_establecimientos_gastronomia_to_gastronomia");
+            });
+
+            modelBuilder.Entity<EstadoDePreferencias>(entity =>
+            {
+                entity.HasKey(e => e.IdEstadoDePreferencias);
+
+                entity.ToTable("estado_de_preferencias");
+
+                entity.HasIndex(e => e.IdGrupo)
+                    .HasName("FK_crear_grupos");
+
+                entity.Property(e => e.IdEstadoDePreferencias)
+                    .HasColumnName("id_estado_de_preferencias")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.CantidadUsuariosPorGrupo)
+                    .HasColumnName("cantidad_usuarios_por_grupo")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.ContadorPreferenciasElegidas)
+                    .HasColumnName("contador_preferencias_elegidas")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.IdGrupo)
+                    .HasColumnName("id_grupo")
+                    .HasColumnType("int(11)");
+
+                entity.HasOne(d => d.IdGrupoNavigation)
+                    .WithMany(p => p.EstadoDePreferencias)
+                    .HasForeignKey(d => d.IdGrupo)
+                    .HasConstraintName("FK_crear_grupos");
             });
 
             modelBuilder.Entity<Gastronomia>(entity =>

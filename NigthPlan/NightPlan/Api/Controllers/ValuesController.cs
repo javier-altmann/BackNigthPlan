@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Core.DTO;
+using Core.DTO.CrearGrupo;
 using Core.Interfaces;
 using Core.Services;
 using Core.Services.ResponseModels;
@@ -43,8 +43,11 @@ namespace Api.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody]string value)
+        public void Post([FromBody]CrearGrupoDTO Grupos)
         {
+            
+            
+          //  _grupos.CrearGrupo(participante,grupo);
         }
 
         // PUT api/values/5

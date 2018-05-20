@@ -2,10 +2,12 @@ using System.Collections.Generic;
 using DAL.Interfaces;
 using DAL.Model;
 using Core.DTO;
+using Core.DTO.CrearGrupo;
 using Core.Interfaces;
 using System.Linq;
 using Core.Services.ResponseModels;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace Core.Services
 {
@@ -109,7 +111,9 @@ namespace Core.Services
         {
             var listaDeUsuarios = context.Usuarios.Where(x=> x.Mail == email)
                                                   .Select(user=> new UsuarioDTO(){
-                                                      Mail = user.Mail
+                                                      Mail = user.Mail,
+                                                      IdUsuario = user.IdUsuario
+                                                      
                                                   }).ToList();
             OperationResult<IEnumerable<UsuarioDTO>> operationResult = new OperationResult<IEnumerable<UsuarioDTO>>();                                     
             if (listaDeUsuarios.Any())
@@ -121,6 +125,46 @@ namespace Core.Services
             return operationResult;
             
         }
+
+ /*CUANDO CREO UN GRUPO, TENGO QUE INSERTAR EN LA TABLA estado_de_preferencias el id_grupo y 
+            cantidad_usuarios_por_grupo(contar la cantidad de usuarios que agrego)
+        */
+        public void CrearGrupo(CrearGrupoUsuarioDTO participante,CrearGrupoDTO grupo){
+         /*
+            var fechaString = DateTime.Today.ToString();
+            //Guardo dentro de fechaSinHora la fecha con formato Dia-Mes-Año
+            var fechaSinHora = fechaString.Split(' ').FirstOrDefault().Replace("/", "-");
+          
+            Grupos grupos = new Grupos();
+            grupos.Nombre = grupo.NombreDelGrupo;
+            grupos.Imagen = grupo.Imagen;
+            grupos.FechaCreacion = fechaSinHora;
+            
+            
+            context.Grupos.Add(grupos);
+
+            GruposUsuarios usuario = new GruposUsuarios();
+            usuario.IdUsuarios = participante.IdUsuario;
+            usuario.IdGrupo = grupos.IdGrupo;
+            context.GruposUsuarios.Add(usuario);
+            */ 
+            /*var cantidadDeUsuarios = participante.Count();
+
+            EstadoDePreferencias estadoDePreferencias = new EstadoDePreferencias();
+            estadoDePreferencias.CantidadUsuariosPorGrupo = cantidadDeUsuarios; 
+            estadoDePreferencias.IdGrupo = grupos.IdGrupo;
+            estadoDePreferencias.ContadorPreferenciasElegidas = 0;
+            context.Add(estadoDePreferencias);
+    */
+            context.SaveChanges();
+            
+            
+        }
+
+        
     }
 
+    
+
 }
+      

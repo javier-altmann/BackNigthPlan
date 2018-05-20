@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Core.Services
 {
     public class RecomendacionesService : IRecomendadosService
-    {
+ {
 
         /* Guardar un atributo en la tabla que contenga la cantidad de usuarios que responden la preferencia
          en el grupo. Hacer una query que agarre ese atributo y le sume 1 cuando el nuevo usuario responde.
@@ -52,15 +52,17 @@ namespace Core.Services
             return true;
         }
         //En este metodo agarro las respuestas de todos los usuarios del grupo y agarro la intersección para después hacer la query de establecimientos sugeridos
-        private RespuestasPreferenciasDTO parsePreferenciasEstablecimientos(int id_grupo){
+      /*  private RespuestasPreferenciasDTO parsePreferenciasEstablecimientos(int id_grupo){
             //EN CASO DE QUE SEA VERDADERO(todos respondieron) busco la intersección entre los ids de las respuestas
-           /* if(validarSiRespondieronTodosLosUsuariosDelGrupo(1))
+            if(validarSiRespondieronTodosLosUsuariosDelGrupo(1))
             {
                 //Hago el parseo de datos para hacer la query 
             }
-            */
+            
             //Sino devolver un message 
-            return null;
-        }
+         return null;
+     }
+     */
     }
 }
+ 

@@ -27,7 +27,10 @@ namespace Core.Services
 
         public EstablecimientoDTO getLugaresRecomendados()
         {
-            //parsePreferenciasEstablecimientos(1);
+            //Guardo las intersecciones
+            //var test = GetIntersecciones(); 
+
+            // Hago la query en base a las intersecciones    
             throw new System.NotImplementedException();
         }
         //El método devuelve los usuarios que respondieron para darle el check al mobile.
@@ -39,27 +42,25 @@ namespace Core.Services
         private bool validarSiRespondieronTodosLosUsuariosDelGrupo(int id_grupo)
         {
 
-            //1. Hacer count de cuántos usuarios pertenecen al grupo. var cantidadDeUsuariosEnElGrupo
+            //1.Hago query para obtener cuántos usuarios pertenecen al grupo y cuántos respondieron sus preferencias. 
 
-            var cantidadDeUsuariosEnElGrupo = context.Grupos.Where(x => x.IdGrupo == id_grupo)
-                                                      .Include(x => x.GruposUsuarios)
-                                                      .SelectMany(x => x.GruposUsuarios)
-                                                      .Include(x => x.IdUsuariosNavigation).ToList();
-
-
-            //2. hacer count de cuántos usuarios respondieron ->  Tabla.Where(x=> x.id_grupo). var cantidadDeUsuariosQueRespondieron
-            //3. Hacer if(cantidadDeUsuariosEnElGrupo == cantidadDeUsuariosQueRespondieron){true }else{false}
-            return true;
+            var EstadoDePreferencias = context.EstadoDePreferencias.Where(x => x.IdGrupo == id_grupo)
+                                                     .Select(x=> new EstadoDePreferenciasDTO{
+                                                         CantidadDeUsuariosPorGrupo = x.CantidadUsuariosPorGrupo,
+                                                         ContadorDePreferenciasElegidas = x.ContadorPreferenciasElegidas
+                                                     }).FirstOrDefault();
+            if(EstadoDePreferencias.CantidadDeUsuariosPorGrupo == EstadoDePreferencias.ContadorDePreferenciasElegidas){
+                return true;
+            }
+          
+            return false;
         }
         //En este metodo agarro las respuestas de todos los usuarios del grupo y agarro la intersección para después hacer la query de establecimientos sugeridos
-        public PreferenciasDTO parsePreferenciasEstablecimientos(int id_grupo)
+        private PreferenciasDTO DeserializarPreferenciasDelUsuario(int id_grupo)
         {
-            /*EN CASO DE QUE SEA VERDADERO(todos respondieron) busco la intersección entre
-             los ids de las respuestas*/
-
+            //EN CASO DE QUE SEA VERDADERO(todos respondieron) parseo las respuestas de los usuarios
             if (validarSiRespondieronTodosLosUsuariosDelGrupo(1))
             {
-                //Hago el parseo de datos para hacer la query 
                 var respuestasUsuarios = context.RespuestasUsuariosGrupos.Where(x => x.IdGrupo == id_grupo)
                                             .Select(x => x.Respuestas).ToList();
 
@@ -78,13 +79,56 @@ namespace Core.Services
                     preferencias.IdsGastronomia.AddRange(respuestaDeserializada.IdsGastronomia);
                    
                 }
-                return preferencias;
+                
             }
-
-            //Sino devolver un message 
-            return null;
+            PreferenciasDTO preferenciasResponse = new PreferenciasDTO();
+            preferenciasResponse.Response = false;
+                
+            return preferenciasResponse;
         }
 
+        // Hacer un metodo para encontrar las intersecciones y usarlo dentro de getLugaresRecomendados
+   
+        private void GetIntersecciones(){
+           //Agarrar en una nuva lista las intersecciones de cada lista 
+
+            var listasDeserializadas = DeserializarPreferenciasDelUsuario(1);
+
+
+            List<int> listaNuevaIdBarrios = new List<int>();
+
+            for (int i = 0; i < listasDeserializadas.IdsBarrios.Count; i++)
+            {
+                if (!(listaNuevaIdBarrios.Contains(listasDeserializadas.IdsBarrios[i])))
+                {
+                    listaNuevaIdBarrios.Add(listasDeserializadas.IdsBarrios[i]);
+                }
+            }
+
+            List<int> listaNuevaIdCaracteristicas = new List<int>();
+
+             for (int i = 0; i < listasDeserializadas.IdsCaracteristicas.Count; i++)
+            {
+                if (!(listaNuevaIdBarrios.Contains(listasDeserializadas.IdsCaracteristicas[i])))
+                {
+                    listaNuevaIdCaracteristicas.Add(listasDeserializadas.IdsCaracteristicas[i]);
+                }
+            }
+
+
+            List<int> listaNuevaIdGastronomia= new List<int>();
+
+             for (int i = 0; i < listasDeserializadas.IdsGastronomia.Count; i++)
+            {
+                if (!(listaNuevaIdBarrios.Contains(listasDeserializadas.IdsGastronomia[i])))
+                {
+                    listaNuevaIdGastronomia.Add(listasDeserializadas.IdsGastronomia[i]);
+                }
+            }
+
+        }
+
+       
     }
 
 }

@@ -4,6 +4,7 @@ using Core.DTO.CrearGrupo;
 using Core.DTO;
 using Core.Services.ResponseModels;
 
+
 namespace Core.Interfaces
 {
     public interface IGruposService
@@ -19,7 +20,7 @@ namespace Core.Interfaces
     
         OperationResult<IEnumerable<UsuarioDTO>> getUsuarios(string email);
 
-        void CrearGrupo(CrearGrupoUsuarioDTO participante,CrearGrupoDTO grupo);
+        CrearGrupoResponseApi CrearGrupo(GruposDTO grupo);
 
        
     }

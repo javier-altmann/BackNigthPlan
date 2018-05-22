@@ -6,5 +6,7 @@ namespace Core.Interfaces
     {
         EstablecimientoDTO getLugaresRecomendados();   
         void getUsuariosQueRespondieron();
+
+        PreferenciasDTO parsePreferenciasEstablecimientos(int id_grupo);
     }
 }

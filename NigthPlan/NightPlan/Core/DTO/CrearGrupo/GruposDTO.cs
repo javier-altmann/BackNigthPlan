@@ -4,7 +4,7 @@ namespace Core.DTO.CrearGrupo
     {
         public string NombreDelGrupo { get; set; }
         public string Imagen { get; set; }
-        public UsuarioDTO usuarios { get; set; }
+        public UsuariosGrupoDTO[] usuarios { get; set; }
 
     }
 }

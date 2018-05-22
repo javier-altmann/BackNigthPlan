@@ -126,42 +126,45 @@ namespace Core.Services
             
         }
 
- /*CUANDO CREO UN GRUPO, TENGO QUE INSERTAR EN LA TABLA estado_de_preferencias el id_grupo y 
+        /*CUANDO CREO UN GRUPO, TENGO QUE INSERTAR EN LA TABLA estado_de_preferencias el id_grupo y 
             cantidad_usuarios_por_grupo(contar la cantidad de usuarios que agrego)
         */
-        public void CrearGrupo(CrearGrupoUsuarioDTO participante,CrearGrupoDTO grupo){
-         /*
+        public CrearGrupoResponseApi CrearGrupo(GruposDTO grupo){
+         
             var fechaString = DateTime.Today.ToString();
             //Guardo dentro de fechaSinHora la fecha con formato Dia-Mes-Año
             var fechaSinHora = fechaString.Split(' ').FirstOrDefault().Replace("/", "-");
-          
+            try{
             Grupos grupos = new Grupos();
             grupos.Nombre = grupo.NombreDelGrupo;
             grupos.Imagen = grupo.Imagen;
             grupos.FechaCreacion = fechaSinHora;
-            
-            
-            context.Grupos.Add(grupos);
 
-            GruposUsuarios usuario = new GruposUsuarios();
-            usuario.IdUsuarios = participante.IdUsuario;
-            usuario.IdGrupo = grupos.IdGrupo;
-            context.GruposUsuarios.Add(usuario);
-            */ 
-            /*var cantidadDeUsuarios = participante.Count();
+            context.Grupos.Add(grupos);
+         
+            var usuarios = grupo.usuarios.Select(x=> new GruposUsuarios(){
+                IdUsuarios = x.IdUsuario,
+                IdGrupo = grupos.IdGrupo,
+            });
+
+            context.GruposUsuarios.AddRange(usuarios);
+
+            var cantidadDeUsuarios = grupo.usuarios.Count();
 
             EstadoDePreferencias estadoDePreferencias = new EstadoDePreferencias();
             estadoDePreferencias.CantidadUsuariosPorGrupo = cantidadDeUsuarios; 
             estadoDePreferencias.IdGrupo = grupos.IdGrupo;
             estadoDePreferencias.ContadorPreferenciasElegidas = 0;
             context.Add(estadoDePreferencias);
-    */
+    
             context.SaveChanges();
-            
-            
+        }catch(Exception ex){
+            return new CrearGrupoResponseApi(false,"Fallo al guardar los datos del grupo");
         }
 
-        
+            return new CrearGrupoResponseApi(true,"Se guardo el grupo exitosamente");
+        }
+
     }
 
     

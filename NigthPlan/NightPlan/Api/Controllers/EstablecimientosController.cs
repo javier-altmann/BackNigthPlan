@@ -15,7 +15,7 @@ namespace Api.Controllers
 
         // GET api/values
         [HttpGet]
-        public IActionResult GetEstablecimientosDestacados()
+        public IActionResult Get()
         {
             return null;
         }
@@ -29,20 +29,20 @@ namespace Api.Controllers
 
         // POST api/values
         [HttpPost]
-        public void CrearEstablecimiento([FromBody]string value)
+        public void Post([FromBody]string value)
         {
 
         }
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public void ActualizarEstablecimientos(int id, [FromBody]string value)
+        public void Update(int id, [FromBody]string value)
         {
         }
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
-        public void EliminarEstablecimientos(int id)
+        public void Delete(int id)
         {
         }
         

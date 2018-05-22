@@ -3,11 +3,13 @@ using Core.DTO;
 using Core.Interfaces;
 using DAL.Model;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace Core.Services
 {
     public class RecomendacionesService : IRecomendadosService
- {
+    {
 
         /* Guardar un atributo en la tabla que contenga la cantidad de usuarios que responden la preferencia
          en el grupo. Hacer una query que agarre ese atributo y le sume 1 cuando el nuevo usuario responde.
@@ -22,7 +24,7 @@ namespace Core.Services
 
             this.context = context;
         }
-        
+
         public EstablecimientoDTO getLugaresRecomendados()
         {
             //parsePreferenciasEstablecimientos(1);
@@ -36,33 +38,54 @@ namespace Core.Services
 
         private bool validarSiRespondieronTodosLosUsuariosDelGrupo(int id_grupo)
         {
-            //Hacer query para revisar si todos los usuarios del grupo respondieron sus preferencias
 
             //1. Hacer count de cuántos usuarios pertenecen al grupo. var cantidadDeUsuariosEnElGrupo
 
-           var cantidadDeUsuariosEnElGrupo =  context.Grupos.Where(x => x.IdGrupo == id_grupo)
-                                                     .Include(x => x.GruposUsuarios)
-                                                     .SelectMany(x => x.GruposUsuarios)
-                                                     .Include(x => x.IdUsuariosNavigation).ToList();
-                                                     
+            var cantidadDeUsuariosEnElGrupo = context.Grupos.Where(x => x.IdGrupo == id_grupo)
+                                                      .Include(x => x.GruposUsuarios)
+                                                      .SelectMany(x => x.GruposUsuarios)
+                                                      .Include(x => x.IdUsuariosNavigation).ToList();
+
 
             //2. hacer count de cuántos usuarios respondieron ->  Tabla.Where(x=> x.id_grupo). var cantidadDeUsuariosQueRespondieron
             //3. Hacer if(cantidadDeUsuariosEnElGrupo == cantidadDeUsuariosQueRespondieron){true }else{false}
-            // 
             return true;
         }
         //En este metodo agarro las respuestas de todos los usuarios del grupo y agarro la intersección para después hacer la query de establecimientos sugeridos
-      /*  private RespuestasPreferenciasDTO parsePreferenciasEstablecimientos(int id_grupo){
-            //EN CASO DE QUE SEA VERDADERO(todos respondieron) busco la intersección entre los ids de las respuestas
-            if(validarSiRespondieronTodosLosUsuariosDelGrupo(1))
+        public PreferenciasDTO parsePreferenciasEstablecimientos(int id_grupo)
+        {
+            /*EN CASO DE QUE SEA VERDADERO(todos respondieron) busco la intersección entre
+             los ids de las respuestas*/
+
+            if (validarSiRespondieronTodosLosUsuariosDelGrupo(1))
             {
                 //Hago el parseo de datos para hacer la query 
+                var respuestasUsuarios = context.RespuestasUsuariosGrupos.Where(x => x.IdGrupo == id_grupo)
+                                            .Select(x => x.Respuestas).ToList();
+
+                PreferenciasDTO preferencias = new PreferenciasDTO
+                    {
+                        IdsBarrios = new List<int>(),
+                        IdsCaracteristicas = new List<int>(),
+                        IdsGastronomia = new List<int>()  
+                    };
+
+                foreach (var respuestas in respuestasUsuarios)
+                {
+                    var respuestaDeserializada = JsonConvert.DeserializeObject<PreferenciasDTO>(respuestas);
+                    preferencias.IdsBarrios.AddRange(respuestaDeserializada.IdsBarrios);
+                    preferencias.IdsCaracteristicas.AddRange(respuestaDeserializada.IdsCaracteristicas);
+                    preferencias.IdsGastronomia.AddRange(respuestaDeserializada.IdsGastronomia);
+                   
+                }
+                return preferencias;
             }
-            
+
             //Sino devolver un message 
-         return null;
-     }
-     */
+            return null;
+        }
+
     }
+
 }
- 
+

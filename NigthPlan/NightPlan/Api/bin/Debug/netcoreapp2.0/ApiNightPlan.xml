@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Api</name>
+    </assembly>
+    <members>
+        <member name="M:Api.Controllers.ValuesController.Post(Core.DTO.CrearGrupo.GruposDTO)">
+            <summary>
+            Esto es un test
+            </summary>
+            <param name="Grupos"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Core.DTO;
 using Core.DTO.CrearGrupo;
 using Core.Interfaces;
 using Core.Services;
@@ -16,20 +17,24 @@ namespace Api.Controllers
     public class ValuesController : Controller
     {
         IGruposService _grupos;
-        public ValuesController(IGruposService grupos)
+        IRecomendadosService _recomendaciones;
+        public ValuesController(IGruposService grupos,IRecomendadosService recomendados)
         {
             _grupos = grupos;
+            _recomendaciones = recomendados;
         }
 
         // GET api/values
         [HttpGet]
-        public IEnumerable<string> Get()
+        [Produces("application/json",Type = typeof(OperationResult<IEnumerable<GruposDelUsuarioDTO>>))]
+        public IActionResult Test()
         {
-          var gruposDelUsuario =  _grupos.GetGruposDelUsuario(1,10,0);
-          var buscador = _grupos.GetSearchGroups(1,"ra",10,0);
-          var usuariosDelGrupo = _grupos.GetUsuariosDelGrupos(1);
+          //var gruposDelUsuario =  _grupos.GetGruposDelUsuario(1,10,0);
+         // var buscador = _grupos.GetSearchGroups(1,"ra",10,0);
+          //var usuariosDelGrupo = _grupos.GetUsuariosDelGrupos(1);
+          var test = _recomendaciones.parsePreferenciasEstablecimientos(1);
             
-            return new  string[] { "value1", "value2" };
+            return Ok(test);
         }
 
 
@@ -38,16 +43,22 @@ namespace Api.Controllers
         [HttpGet("{id}")]
         public string Get(int id)
         {
+            
             return "value";
         }
 
         // POST api/values
+        /// <summary>
+        /// Esto es un test
+        /// </summary>
+        /// <param name="Grupos"></param>
+        /// <returns></returns>
         [HttpPost]
-        public void Post([FromBody]CrearGrupoDTO Grupos)
+        public void Post([FromBody]GruposDTO Grupos)
         {
             
             
-          //  _grupos.CrearGrupo(participante,grupo);
+           _grupos.CrearGrupo(Grupos);
         }
 
         // PUT api/values/5

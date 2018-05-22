@@ -60,3 +60,4 @@
 /home/javier/BackNigthPlan/NigthPlan/NightPlan/Api/obj/Debug/netcoreapp2.0/Api.csproj.CopyComplete
 /home/javier/BackNigthPlan/NigthPlan/NightPlan/Api/obj/Debug/netcoreapp2.0/Api.dll
 /home/javier/BackNigthPlan/NigthPlan/NightPlan/Api/obj/Debug/netcoreapp2.0/Api.pdb
+/home/javier/BackNigthPlan/NigthPlan/NightPlan/Api/bin/Debug/netcoreapp2.0/ApiNightPlan.xml

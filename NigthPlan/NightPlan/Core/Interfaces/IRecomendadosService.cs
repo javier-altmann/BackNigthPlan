@@ -7,6 +7,8 @@ namespace Core.Interfaces
         EstablecimientoDTO getLugaresRecomendados();   
         void getUsuariosQueRespondieron();
 
+        PreferenciasDTO GetIntersecciones();
+
       
     }
 }

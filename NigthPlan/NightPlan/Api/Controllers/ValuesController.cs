@@ -32,9 +32,10 @@ namespace Api.Controllers
           //var gruposDelUsuario =  _grupos.GetGruposDelUsuario(1,10,0);
          // var buscador = _grupos.GetSearchGroups(1,"ra",10,0);
           //var usuariosDelGrupo = _grupos.GetUsuariosDelGrupos(1);
-          var test = _recomendaciones.parsePreferenciasEstablecimientos(1);
+          //var test = _recomendaciones.parsePreferenciasEstablecimientos(1);
+           var test = _recomendaciones.GetIntersecciones();
             
-            return Ok(test);
+            return Ok();
         }
 
 

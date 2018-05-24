@@ -3,11 +3,9 @@ using System.Linq;
 
 namespace Core.Services
 {
-    public static class Test
+    public static class Utilities
     {
-
-
-        public static List<int> GetDefault(this List<int> list)
+        public static List<int> GetElementosRepetidosDeUnaLista(this List<int> list)
         {
             var listaOrdenada = list.OrderBy(x=>x).ToList();
             List<int> auxiliar = new List<int>();

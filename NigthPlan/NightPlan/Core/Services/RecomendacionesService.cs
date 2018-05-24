@@ -76,7 +76,7 @@ namespace Core.Services
             foreach (var respuestas in respuestasUsuarios)
             {
                 var respuestaDeserializada = JsonConvert.DeserializeObject<PreferenciasDTO>(respuestas);
-                
+                preferencias.IdsBarrios.AddRange(respuestaDeserializada.IdsBarrios);
                 preferencias.IdsCaracteristicas.AddRange(respuestaDeserializada.IdsCaracteristicas);
                 preferencias.IdsGastronomia.AddRange(respuestaDeserializada.IdsGastronomia);
 
@@ -90,71 +90,24 @@ namespace Core.Services
             return preferencias;
         }
       
-        public int GetIntersecciones()
+        public  PreferenciasDTO GetIntersecciones()
         {
             //Agarro en una nueva lista las intersecciones de cada lista de preferencias. 
             var listasDeserializadas = DeserializarPreferenciasDelUsuario(1);
-            //var listaOrdenadaIdBarrios = listasDeserializadas.IdsBarrios.OrderBy(x => x).ToList();
 
-
-            var test = Test.GetDefault(DeserializarPreferenciasDelUsuario(1).IdsBarrios);
+            var barrios = Utilities.GetElementosRepetidosDeUnaLista(DeserializarPreferenciasDelUsuario(1).IdsBarrios);
+            var caracteristicas = Utilities.GetElementosRepetidosDeUnaLista(DeserializarPreferenciasDelUsuario(1).IdsCaracteristicas);
+            var gastronomia = Utilities.GetElementosRepetidosDeUnaLista(DeserializarPreferenciasDelUsuario(1).IdsGastronomia);
             
-/*  
+ 
               PreferenciasDTO preferencias = new PreferenciasDTO
             {
-                IdsBarrios = new List<int>(),
-                IdsCaracteristicas = new List<int>(),
-                IdsGastronomia = new List<int>()
+                IdsBarrios = barrios,
+                IdsCaracteristicas = caracteristicas,
+                IdsGastronomia = gastronomia
             };
-
-
-            for (int i = 1; i < listaOrdenadaIdBarrios.Count; i++)
-            {
-
-                if (listaOrdenadaIdBarrios[i-1] == listaOrdenadaIdBarrios[i])
-                {
-                    if (!preferencias.IdsBarrios.Contains(listaOrdenadaIdBarrios[i]))
-                    {
-                        preferencias.IdsBarrios.Add(listaOrdenadaIdBarrios[i]);
-                    }
-                }
-
-            }
-
-            var listaOrdenadaCaracteristicas = listasDeserializadas.IdsCaracteristicas.OrderBy(x => x).ToList();
-
-
-            for (int i = 1; i < listaOrdenadaCaracteristicas.Count; i++)
-            {
-
-                if (listaOrdenadaCaracteristicas[i-1] == listaOrdenadaCaracteristicas[i])
-                {
-                    if (!preferencias.IdsCaracteristicas.Contains(listaOrdenadaCaracteristicas[i]))
-                    {
-                        preferencias.IdsCaracteristicas.Add(listaOrdenadaCaracteristicas[i]);
-                    }
-                }
-
-            }
-
-            var listaOrdenadaGastronomia = listasDeserializadas.IdsGastronomia.OrderBy(x => x).ToList();
-
-            for (int i = 1; i < listaOrdenadaGastronomia.Count; i++)
-            {
-
-                if (listaOrdenadaGastronomia[i-1] == listaOrdenadaGastronomia[i])
-                {
-                    if (!preferencias.IdsGastronomia.Contains(listaOrdenadaGastronomia[i]))
-                    {
-                        preferencias.IdsGastronomia.Add(listaOrdenadaGastronomia[i]);
-                    }
-                }
-
-            }
-
+            
             return preferencias;
-            */
-            return 1;
         }
 
     }

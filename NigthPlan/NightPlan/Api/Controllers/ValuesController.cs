@@ -18,10 +18,12 @@ namespace Api.Controllers
     {
         IGruposService _grupos;
         IRecomendadosService _recomendaciones;
-        public ValuesController(IGruposService grupos,IRecomendadosService recomendados)
+        IPreferenciasService _preferencias;
+        public ValuesController(IGruposService grupos,IRecomendadosService recomendados,IPreferenciasService preferencias)
         {
             _grupos = grupos;
             _recomendaciones = recomendados;
+            _preferencias = preferencias;
         }
 
         // GET api/values
@@ -33,7 +35,13 @@ namespace Api.Controllers
          // var buscador = _grupos.GetSearchGroups(1,"ra",10,0);
           //var usuariosDelGrupo = _grupos.GetUsuariosDelGrupos(1);
           //var test = _recomendaciones.parsePreferenciasEstablecimientos(1);
-           var test = _recomendaciones.GetIntersecciones();
+          // var test = _recomendaciones.GetIntersecciones();
+          var preferences = new GuardarPreferenciasDTO{
+              IdUsuario = 2,
+              IdGrupo = 1,
+
+          };
+          _preferencias.GuardarPreferencias(preferences);
             
             return Ok();
         }

@@ -16,7 +16,6 @@ namespace Core.Services
         private nightPlanContext context;
         public GruposService(nightPlanContext context)
         {
-
             this.context = context;
         }
 
@@ -61,6 +60,7 @@ namespace Core.Services
                                               Nombre = x.IdUsuariosNavigation.Nombre,
                                               Apellido = x.IdUsuariosNavigation.Apellido,
                                               ImagenPerfil = x.IdUsuariosNavigation.ImagenPerfil
+
                                           }).OrderBy(x => x.IdUsuario).ToList();
 
 
@@ -109,13 +109,14 @@ namespace Core.Services
         // Habría que ver como hacer un metodo para que a medida que escriba le sugiera distintos usuarios
         public OperationResult<IEnumerable<UsuarioDTO>> getUsuarios(string email)
         {
-            var listaDeUsuarios = context.Usuarios.Where(x=> x.Mail == email)
-                                                  .Select(user=> new UsuarioDTO(){
+            var listaDeUsuarios = context.Usuarios.Where(x => x.Mail == email)
+                                                  .Select(user => new UsuarioDTO()
+                                                  {
                                                       Mail = user.Mail,
                                                       IdUsuario = user.IdUsuario
-                                                      
+
                                                   }).ToList();
-            OperationResult<IEnumerable<UsuarioDTO>> operationResult = new OperationResult<IEnumerable<UsuarioDTO>>();                                     
+            OperationResult<IEnumerable<UsuarioDTO>> operationResult = new OperationResult<IEnumerable<UsuarioDTO>>();
             if (listaDeUsuarios.Any())
             {
                 operationResult.ObjectResult = listaDeUsuarios;
@@ -123,51 +124,60 @@ namespace Core.Services
             }
 
             return operationResult;
-            
+
         }
 
         /*CUANDO CREO UN GRUPO, TENGO QUE INSERTAR EN LA TABLA estado_de_preferencias el id_grupo y 
             cantidad_usuarios_por_grupo(contar la cantidad de usuarios que agrego)
         */
-        public CrearGrupoResponseApi CrearGrupo(GruposDTO grupo){
-         
+        public CrearGrupoResponseApi CrearGrupo(GruposDTO grupo)
+        {
+
             var fechaString = DateTime.Today.ToString();
             //Guardo dentro de fechaSinHora la fecha con formato Dia-Mes-Año
             var fechaSinHora = fechaString.Split(' ').FirstOrDefault().Replace("/", "-");
-            try{
-            Grupos grupos = new Grupos();
-            grupos.Nombre = grupo.NombreDelGrupo;
-            grupos.Imagen = grupo.Imagen;
-            grupos.FechaCreacion = fechaSinHora;
+            try
+            {
+                Grupos grupos = new Grupos()
+                {
+                    Nombre = grupo.NombreDelGrupo,
+                    Imagen = grupo.Imagen,
+                    FechaCreacion = fechaSinHora
+                };
 
-            context.Grupos.Add(grupos);
-         
-            var usuarios = grupo.usuarios.Select(x=> new GruposUsuarios(){
-                IdUsuarios = x.IdUsuario,
-                IdGrupo = grupos.IdGrupo,
-            });
+                context.Grupos.Add(grupos);
 
-            context.GruposUsuarios.AddRange(usuarios);
+                var usuarios = grupo.usuarios.Select(x => new GruposUsuarios()
+                {
+                    IdUsuarios = x.IdUsuario,
+                    IdGrupo = grupos.IdGrupo,
+                });
 
-            var cantidadDeUsuarios = grupo.usuarios.Count();
+                context.GruposUsuarios.AddRange(usuarios);
 
-            EstadoDePreferencias estadoDePreferencias = new EstadoDePreferencias();
-            estadoDePreferencias.CantidadUsuariosPorGrupo = cantidadDeUsuarios; 
-            estadoDePreferencias.IdGrupo = grupos.IdGrupo;
-            estadoDePreferencias.ContadorPreferenciasElegidas = 0;
-            context.Add(estadoDePreferencias);
-    
-            context.SaveChanges();
-        }catch(Exception ex){
-            return new CrearGrupoResponseApi(false,"Fallo al guardar los datos del grupo");
-        }
+                var cantidadDeUsuarios = grupo.usuarios.Count();
 
-            return new CrearGrupoResponseApi(true,"Se guardo el grupo exitosamente");
+                EstadoDePreferencias estadoDePreferencias = new EstadoDePreferencias
+                {
+                    CantidadUsuariosPorGrupo = cantidadDeUsuarios,
+                    IdGrupo = grupos.IdGrupo,
+                    ContadorPreferenciasElegidas = 0
+                };
+                context.Add(estadoDePreferencias);
+
+                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return new CrearGrupoResponseApi(false, "Fallo al guardar los datos del grupo");
+            }
+
+            return new CrearGrupoResponseApi(true, "Se guardo el grupo exitosamente");
         }
 
     }
 
-    
+
 
 }
-      
+

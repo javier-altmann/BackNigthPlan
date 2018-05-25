@@ -5,10 +5,6 @@ namespace Core.Interfaces
     public interface IRecomendadosService
     {
         EstablecimientoDTO getLugaresRecomendados();   
-        void getUsuariosQueRespondieron();
 
-        PreferenciasDTO GetIntersecciones();
-
-      
     }
 }

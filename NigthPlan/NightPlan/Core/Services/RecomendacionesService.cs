@@ -18,24 +18,21 @@ namespace Core.Services
          ---id_grupo contador_preferencias_elegidas  cantidad_usuarios_por_grupo---
          También cuando se crea un grupo guardo la cantidad de persona que hay en la misma tabla. 
         */
+         
         private nightPlanContext context;
         public RecomendacionesService(nightPlanContext context)
         {
-
             this.context = context;
         }
 
         public EstablecimientoDTO getLugaresRecomendados()
         {
-            //Guardo las intersecciones
-            //var test = GetIntersecciones(); 
+            //1. Traigo las intersecciones
+            //var test = GetIntersecciones();
+            //2. Validar si la Response fue false 
+            //3. En caso de que si responder que todavía no se puede
+            //4. En caso de que traiga datos: Hacer algoritmo para recomendar lugares 
 
-            // Hago la query en base a las intersecciones    
-            throw new System.NotImplementedException();
-        }
-        //El método devuelve los usuarios que respondieron para darle el check al mobile.
-        public void getUsuariosQueRespondieron()
-        {
             throw new System.NotImplementedException();
         }
 
@@ -61,53 +58,62 @@ namespace Core.Services
         private PreferenciasDTO DeserializarPreferenciasDelUsuario(int id_grupo)
         {
             //EN CASO DE QUE SEA VERDADERO(todos respondieron) parseo las respuestas de los usuarios
-            //if (validarSiRespondieronTodosLosUsuariosDelGrupo(1))
-            //{
-            var respuestasUsuarios = context.RespuestasUsuariosGrupos.Where(x => x.IdGrupo == id_grupo)
-                                        .Select(x => x.Respuestas).ToList();
-
-            PreferenciasDTO preferencias = new PreferenciasDTO
+            if (validarSiRespondieronTodosLosUsuariosDelGrupo(id_grupo))
             {
-                IdsBarrios = new List<int>(),
-                IdsCaracteristicas = new List<int>(),
-                IdsGastronomia = new List<int>()
-            };
+                var respuestasUsuarios = context.RespuestasUsuariosGrupos.Where(x => x.IdGrupo == id_grupo)
+                                            .Select(x => x.Respuestas).ToList();
 
-            foreach (var respuestas in respuestasUsuarios)
-            {
-                var respuestaDeserializada = JsonConvert.DeserializeObject<PreferenciasDTO>(respuestas);
-                preferencias.IdsBarrios.AddRange(respuestaDeserializada.IdsBarrios);
-                preferencias.IdsCaracteristicas.AddRange(respuestaDeserializada.IdsCaracteristicas);
-                preferencias.IdsGastronomia.AddRange(respuestaDeserializada.IdsGastronomia);
+                PreferenciasDTO preferencias = new PreferenciasDTO
+                {
+                    IdsBarrios = new List<int>(),
+                    IdsCaracteristicas = new List<int>(),
+                    IdsGastronomia = new List<int>(),
+                    Response = true
+                };
+
+                foreach (var respuestas in respuestasUsuarios)
+                {
+                    var respuestaDeserializada = JsonConvert.DeserializeObject<PreferenciasDTO>(respuestas);
+                    preferencias.IdsBarrios.AddRange(respuestaDeserializada.IdsBarrios);
+                    preferencias.IdsCaracteristicas.AddRange(respuestaDeserializada.IdsCaracteristicas);
+                    preferencias.IdsGastronomia.AddRange(respuestaDeserializada.IdsGastronomia);
+
+                }
 
             }
+            PreferenciasDTO preferenciasResponse = new PreferenciasDTO
+            {
+                Response = false
+            };
 
-            //}
-            // PreferenciasDTO preferenciasResponse = new PreferenciasDTO();
-            //preferenciasResponse.Response = false;
-
-            //return preferenciasResponse;
-            return preferencias;
+            return preferenciasResponse;
         }
-      
-        public  PreferenciasDTO GetIntersecciones()
+
+        private PreferenciasDTO GetIntersecciones(int id_grupo)
         {
             //Agarro en una nueva lista las intersecciones de cada lista de preferencias. 
-            var listasDeserializadas = DeserializarPreferenciasDelUsuario(1);
-
-            var barrios = Utilities.GetElementosRepetidosDeUnaLista(DeserializarPreferenciasDelUsuario(1).IdsBarrios);
-            var caracteristicas = Utilities.GetElementosRepetidosDeUnaLista(DeserializarPreferenciasDelUsuario(1).IdsCaracteristicas);
-            var gastronomia = Utilities.GetElementosRepetidosDeUnaLista(DeserializarPreferenciasDelUsuario(1).IdsGastronomia);
-            
- 
-              PreferenciasDTO preferencias = new PreferenciasDTO
+            var listasDeserializadas = DeserializarPreferenciasDelUsuario(id_grupo);
+            if (listasDeserializadas.Response)
             {
-                IdsBarrios = barrios,
-                IdsCaracteristicas = caracteristicas,
-                IdsGastronomia = gastronomia
+                var barrios = Utilities.GetElementosRepetidosDeUnaLista(DeserializarPreferenciasDelUsuario(id_grupo).IdsBarrios);
+                var caracteristicas = Utilities.GetElementosRepetidosDeUnaLista(DeserializarPreferenciasDelUsuario(id_grupo).IdsCaracteristicas);
+                var gastronomia = Utilities.GetElementosRepetidosDeUnaLista(DeserializarPreferenciasDelUsuario(id_grupo).IdsGastronomia);
+
+                PreferenciasDTO preferencias = new PreferenciasDTO
+                {
+                    IdsBarrios = barrios,
+                    IdsCaracteristicas = caracteristicas,
+                    IdsGastronomia = gastronomia
+                };
+
+            }
+            PreferenciasDTO preferenciasFlag = new PreferenciasDTO
+            {
+                Response = false
             };
-            
-            return preferencias;
+
+
+            return preferenciasFlag;
         }
 
     }

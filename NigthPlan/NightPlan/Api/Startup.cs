@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Core.Interfaces;
 using Core.Services;
 using DAL.Model;
-//using DAL.Model;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -43,12 +42,14 @@ namespace Api
             });
 
             var connection = Configuration.GetConnectionString("NigthPlanMysql");      
-            
+           
             services.AddDbContext<nightPlanContext>(options => options.UseMySql(connection));
             services.AddScoped<IGruposService, GruposService>();
             services.AddScoped<IEstablecimientosService, EstablecimientosService>();
             services.AddScoped<IUsuariosService, UsuariosService>();
             services.AddScoped<IRecomendadosService, RecomendacionesService>();
+            services.AddScoped<IPreferenciasService, PreferenciasService>();
+
             
         }
 

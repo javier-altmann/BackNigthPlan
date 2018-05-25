@@ -1,7 +1,10 @@
+using Core.DTO;
+using Core.Services.ResponseModels;
+
 namespace Core.Interfaces
 {
     public interface IPreferenciasService
     {
-        void GuardarPreferencias();
+        PostResult<GuardarPreferenciasDTO> GuardarPreferencias(GuardarPreferenciasDTO preferencias);
     }
 }

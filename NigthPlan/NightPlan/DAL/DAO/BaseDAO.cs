@@ -25,5 +25,7 @@ namespace DAL.DAO
             context.Set<T>().Update(entity);
             context.SaveChanges();
         }
+    
     }
+    
 }

@@ -8,6 +8,7 @@ namespace DAL.Model
     {
         public virtual DbSet<Barrios> Barrios { get; set; }
         public virtual DbSet<Caracteristicas> Caracteristicas { get; set; }
+        public virtual DbSet<Configuraciones> Configuraciones { get; set; }
         public virtual DbSet<EstablecimientoBarrios> EstablecimientoBarrios { get; set; }
         public virtual DbSet<EstablecimientoCaracteristicas> EstablecimientoCaracteristicas { get; set; }
         public virtual DbSet<Establecimientos> Establecimientos { get; set; }
@@ -20,9 +21,19 @@ namespace DAL.Model
         public virtual DbSet<Usuarios> Usuarios { get; set; }
         public virtual DbSet<UsuariosAdministradores> UsuariosAdministradores { get; set; }
         public virtual DbSet<Votaciones> Votaciones { get; set; }
-         public nightPlanContext(DbContextOptions<nightPlanContext> options)
+
+        public nightPlanContext(DbContextOptions<nightPlanContext> options)
             : base(options)
         { }
+        /*protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseMySql("Server=localhost;User Id=root;Password=root;Database=nightPlan;port=3306");
+            }
+        }
+*/
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Barrios>(entity =>
@@ -54,6 +65,25 @@ namespace DAL.Model
                     .IsRequired()
                     .HasColumnName("nombre")
                     .HasMaxLength(100);
+            });
+
+            modelBuilder.Entity<Configuraciones>(entity =>
+            {
+                entity.HasKey(e => e.IdConfiguracion);
+
+                entity.ToTable("configuraciones");
+
+                entity.Property(e => e.IdConfiguracion)
+                    .HasColumnName("id_configuracion")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.DireccionEstablecimientos)
+                    .HasColumnName("direccion_establecimientos")
+                    .HasMaxLength(500);
+
+                entity.Property(e => e.DireccionFotosUsuarios)
+                    .HasColumnName("direccion_fotos_usuarios")
+                    .HasMaxLength(500);
             });
 
             modelBuilder.Entity<EstablecimientoBarrios>(entity =>
@@ -320,6 +350,10 @@ namespace DAL.Model
                 entity.Property(e => e.IdUsuario)
                     .HasColumnName("id_usuario")
                     .HasColumnType("int(11)");
+
+                entity.Property(e => e.Respondio)
+                    .HasColumnName("respondio")
+                    .HasColumnType("tinyint(1)");
 
                 entity.Property(e => e.Respuestas)
                     .IsRequired()

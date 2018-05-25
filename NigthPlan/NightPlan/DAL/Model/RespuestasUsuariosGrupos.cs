@@ -9,6 +9,7 @@ namespace DAL.Model
         public int? IdUsuario { get; set; }
         public int? IdGrupo { get; set; }
         public string Respuestas { get; set; }
+        public sbyte Respondio { get; set; }
 
         public Grupos IdGrupoNavigation { get; set; }
         public Usuarios IdUsuarioNavigation { get; set; }

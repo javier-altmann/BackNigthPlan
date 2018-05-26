@@ -12,7 +12,6 @@ namespace Core.Interfaces
          IEnumerable<CaracteristicasDTO> GetCaracteristicas();
          IEnumerable<BarrioDTO> GetBarrios();
          IEnumerable<GastronomiaDTO> GetGastronomia();
-
-         PostResult<CrearEstablecimientosDTO> CrearEstablecimientos();
+         PostResult<CrearEstablecimientosDTO> CrearEstablecimientos(CrearEstablecimientosDTO establecimiento);
     }
 }

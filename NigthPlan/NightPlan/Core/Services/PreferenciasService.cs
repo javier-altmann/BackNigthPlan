@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Core.DTO;
@@ -28,37 +29,46 @@ namespace Core.Services
 
         public PostResult<GuardarPreferenciasDTO> GuardarPreferencias(GuardarPreferenciasDTO preferenciasUsuario)
         {
-            var response = @"{ ""IdsBarrios"": [5,6,7],""IdsGastronomia"":[1,2,3],""IdsCaracteristicas"":[4,2,1]
+            try
+            {
+                var response = @"{ ""IdsBarrios"": [5,6,7],""IdsGastronomia"":[1,2,3],""IdsCaracteristicas"":[4,2,1]
 								}";
-            var estadoDeLasPreferencias = context.EstadoDePreferencias.Where(x => x.IdGrupo == preferenciasUsuario.IdGrupo)
-                                  .FirstOrDefault();
-            var preferencias = new RespuestasUsuariosGrupos
-            {
-                IdUsuario = preferenciasUsuario.IdUsuario,
-                IdGrupo = preferenciasUsuario.IdGrupo,
-                Respuestas = response
+                var estadoDeLasPreferencias = context.EstadoDePreferencias.Where(x => x.IdGrupo == preferenciasUsuario.IdGrupo)
+                                      .FirstOrDefault();
+                var preferencias = new RespuestasUsuariosGrupos
+                {
+                    IdUsuario = preferenciasUsuario.IdUsuario,
+                    IdGrupo = preferenciasUsuario.IdGrupo,
+                    Respuestas = response
 
-            };
-           
-           
-            var actualizarContadorDePreferencias = new GuardarPreferenciasDTO
-            {
-                ContadorDePreferencias = ++estadoDeLasPreferencias.ContadorPreferenciasElegidas
-            };
-            var responsePreferencias = new PostResult<GuardarPreferenciasDTO>
-            {
-                ObjectResult = preferenciasUsuario,
-                MensajePersonalizado = "Fallo al guardar el usuario"
-            };
-            if (preferencias.IdUsuario != null && preferencias.IdGrupo != null && preferencias.Respuestas != null)
-            {
+                };
+
+
+                var actualizarContadorDePreferencias = new GuardarPreferenciasDTO
+                {
+                    ContadorDePreferencias = ++estadoDeLasPreferencias.ContadorPreferenciasElegidas
+                };
+                var responsePreferencia = new PostResult<GuardarPreferenciasDTO>
+                {
+                    ObjectResult = preferenciasUsuario,
+                };
                 context.RespuestasUsuariosGrupos.Add(preferencias);
                 estadoDeLasPreferencias.ContadorPreferenciasElegidas = actualizarContadorDePreferencias.ContadorDePreferencias;
                 context.SaveChanges();
-                return responsePreferencias;
-            }
+                return responsePreferencia;
 
-            return responsePreferencias;
+
+            }
+            catch (Exception ex)
+            {
+                var responsePreferencia = new PostResult<GuardarPreferenciasDTO>
+                {
+                    MensajePersonalizado = ex.Message,
+                };
+                return responsePreferencia;
+            }
+    
+
         }
     }
 

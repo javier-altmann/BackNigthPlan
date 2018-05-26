@@ -5,6 +5,9 @@ using Core.Interfaces;
 using System.Collections.Generic;
 using Core.Services.ResponseModels;
 using System.Linq;
+using System;
+using Core.DTO.CrearEstablecimientos;
+
 namespace Core.Services
 {
     public class EstablecimientosService : IEstablecimientosService
@@ -70,41 +73,58 @@ namespace Core.Services
             return caracteristicas;
         }
 
-        private void CrearEstablecimientos(){
-            
-        }
-/*
-  "barrios": [
-			{
-				"IdBarrio":2
-			},
-			{
-				"idBarrio":1
-			}
-	
-    ],
-    	
-	    "caracteristicas": [
-			{
-				"IdCaracteristicas":2
-			},
-			{
-				"IdCaracteristicas":1
-			}
-	
-    ],
-       "gastronomia": [
-			{
-				"IdGastronomia":2
-			},
-			{
-				"IdGastronomia":1
-			}
-	
-    ]
-}
+        public PostResult<CrearEstablecimientosDTO> CrearEstablecimientos(CrearEstablecimientosDTO establecimiento)
+        {
 
- */
+            try
+            {
+                var datosDelEstablecimiento = new Establecimientos
+                {
+                    Nombre = "",
+                    Direccion = "",
+                    Imagen = "",
+                    Destacado = 0
+                };
+
+                EstablecimientoBarrios establecimientoBarrio = new EstablecimientoBarrios
+                {
+                    IdBarrio = establecimiento.Barrio.IdBarrio,
+                    IdEstablecimiento = datosDelEstablecimiento.IdEstablecimiento
+                };
+
+                EstablecimientoCaracteristicas establecimientoCaracteristica = new EstablecimientoCaracteristicas
+                {
+                    IdCaracteristica = establecimiento.Caracteristicas.IdCaracteristica,
+                    IdEstablecimiento = datosDelEstablecimiento.IdEstablecimiento
+                };
+
+                EstablecimientosGastronomia establecimientoGastronomia = new EstablecimientosGastronomia
+                {
+                    IdGastronomia = establecimiento.Gastronomia.IdGastronomia,
+                    IdEstablecimiento = datosDelEstablecimiento.IdEstablecimiento
+                };
+                context.EstablecimientoBarrios.Add(establecimientoBarrio);
+                context.EstablecimientoCaracteristicas.Add(establecimientoCaracteristica);
+                context.EstablecimientosGastronomia.Add(establecimientoGastronomia);
+                context.SaveChanges();
+
+                var responseEstablecimiento = new PostResult<CrearEstablecimientosDTO>
+                {
+                    ObjectResult = establecimiento,
+                };
+
+                return responseEstablecimiento;
+            }
+            catch (Exception ex)
+            {
+                var responseEstablecimiento = new PostResult<CrearEstablecimientosDTO>
+                {
+                    MensajePersonalizado = ex.Message
+                };
+                return responseEstablecimiento;
+            }
+
+        }
 
     }
 }

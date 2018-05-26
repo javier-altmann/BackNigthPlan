@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.0",
-    "signature": "86f8da32de487484b928cfc801b46d3cc50259c4"
+    "signature": "4fcd5ef6e8ee7cc8698b2cc07248eda5aa08ac92"
   },
   "compilationOptions": {
     "defines": [
@@ -1664,7 +1664,7 @@
       "Microsoft.EntityFrameworkCore.SqlServer/2.0.1": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore.Relational": "2.0.1",
-          "System.Data.SqlClient": "4.4.0"
+          "System.Data.SqlClient": "4.4.3"
         },
         "runtime": {
           "lib/netstandard2.0/Microsoft.EntityFrameworkCore.SqlServer.dll": {}
@@ -1719,7 +1719,7 @@
         "dependencies": {
           "Microsoft.Extensions.Caching.Abstractions": "2.0.0",
           "Microsoft.Extensions.Options": "2.0.0",
-          "System.Data.SqlClient": "4.4.0"
+          "System.Data.SqlClient": "4.4.3"
         },
         "runtime": {
           "lib/netstandard2.0/Microsoft.Extensions.Caching.SqlServer.dll": {}
@@ -2833,7 +2833,7 @@
           "System.Threading.Tasks": "4.3.0"
         }
       },
-      "System.Data.SqlClient/4.4.0": {
+      "System.Data.SqlClient/4.4.3": {
         "dependencies": {
           "Microsoft.Win32.Registry": "4.4.0",
           "System.Security.Principal.Windows": "4.4.0",
@@ -3916,7 +3916,8 @@
       },
       "Core/1.0.0": {
         "dependencies": {
-          "DAL": "1.0.0"
+          "DAL": "1.0.0",
+          "System.Data.SqlClient": "4.4.3"
         },
         "runtime": {
           "Core.dll": {}
@@ -5612,12 +5613,12 @@
       "path": "system.data.common/4.3.0",
       "hashPath": "system.data.common.4.3.0.nupkg.sha512"
     },
-    "System.Data.SqlClient/4.4.0": {
+    "System.Data.SqlClient/4.4.3": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-fxb9ghn1k1Ua7FFdlvtiBOD4/PsQvD/fk2KnhS+FK7VC6OggEx6P+lP1P0+KMb5V2dqS1+FbR7HCenoqzJMNIA==",
-      "path": "system.data.sqlclient/4.4.0",
-      "hashPath": "system.data.sqlclient.4.4.0.nupkg.sha512"
+      "sha512": "sha512-D1hEOS1oPLJ6WcGCzpTWe8SauWVxnDoDTUWhv5XCNdRm/QeSUk4BQ3ZDe7BH+zNVHDBkPYjVzpVjnCl43eOSGg==",
+      "path": "system.data.sqlclient/4.4.3",
+      "hashPath": "system.data.sqlclient.4.4.3.nupkg.sha512"
     },
     "System.Diagnostics.Contracts/4.3.0": {
       "type": "package",

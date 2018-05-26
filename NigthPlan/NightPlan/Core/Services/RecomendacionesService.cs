@@ -5,6 +5,7 @@ using DAL.Model;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 
 namespace Core.Services
 {
@@ -32,8 +33,22 @@ namespace Core.Services
             //2. Validar si la Response fue false 
             //3. En caso de que si responder que todavía no se puede
             //4. En caso de que traiga datos: Hacer algoritmo para recomendar lugares 
-
-            throw new System.NotImplementedException();
+/* 
+            SELECT establecimientos.id_establecimiento,establecimientos.nombre,establecimientos.direccion,establecimientos.imagen
+            FROM establecimientos
+            LEFT JOIN establecimiento_barrios
+            ON establecimiento_barrios.id_establecimiento = establecimientos.id_establecimiento
+            LEFT JOIN barrios
+            ON barrios.id_barrio = establecimiento_barrios.id_barrio
+            LEFT JOIN establecimiento_caracteristicas
+            ON establecimiento_caracteristicas.id_establecimiento = establecimientos.id_establecimiento
+            LEFT JOIN caracteristicas
+            ON caracteristicas.id_caracteristica = establecimiento_caracteristicas.id_caracteristica
+            WHERE barrios.id_barrio in (1, 2, 3)
+            AND
+            caracteristicas.id_caracteristica in (1, 2, 3);
+*/
+            return null;
         }
 
         private bool validarSiRespondieronTodosLosUsuariosDelGrupo(int id_grupo)

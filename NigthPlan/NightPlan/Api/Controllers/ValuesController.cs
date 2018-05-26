@@ -41,7 +41,7 @@ namespace Api.Controllers
               IdGrupo = 1,
 
           };
-          _preferencias.GuardarPreferencias(preferences);
+         // _preferencias.GuardarPreferencias(preferences);
             
             return Ok();
         }

@@ -103,17 +103,21 @@ namespace Core.Services
                 {
                     IdsBarrios = barrios,
                     IdsCaracteristicas = caracteristicas,
-                    IdsGastronomia = gastronomia
+                    IdsGastronomia = gastronomia,
+                    Response = true
+                };
+                return preferencias;
+            }
+            else
+            {
+                PreferenciasDTO preferenciasFlag = new PreferenciasDTO
+                {
+                    Response = false
                 };
 
+
+                return preferenciasFlag;
             }
-            PreferenciasDTO preferenciasFlag = new PreferenciasDTO
-            {
-                Response = false
-            };
-
-
-            return preferenciasFlag;
         }
 
     }

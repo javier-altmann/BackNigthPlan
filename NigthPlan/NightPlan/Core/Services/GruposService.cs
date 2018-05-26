@@ -8,6 +8,7 @@ using System.Linq;
 using Core.Services.ResponseModels;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections;
 
 namespace Core.Services
 {
@@ -47,10 +48,11 @@ namespace Core.Services
 
         }
 
-
         public OperationResult<IEnumerable<UsuarioDelGrupoDTO>> GetUsuariosDelGrupos(int id_grupo)
         {
-            var usuariosDelGrupo = context.Grupos.Where(x => x.IdGrupo == id_grupo)
+            
+            List<bool> respondioElUsuario = context.RespuestasUsuariosGrupos.Where(x=>x.IdGrupo == id_grupo).Select(x=>x.Respondio).ToList();
+            List<UsuarioDelGrupoDTO> usuariosDelGrupo = context.Grupos.Where(x => x.IdGrupo == id_grupo)
                                           .Include(x => x.GruposUsuarios)
                                           .SelectMany(x => x.GruposUsuarios)
                                           .Include(x => x.IdUsuariosNavigation)
@@ -62,6 +64,11 @@ namespace Core.Services
                                               ImagenPerfil = x.IdUsuariosNavigation.ImagenPerfil
 
                                           }).OrderBy(x => x.IdUsuario).ToList();
+            
+
+            for(int i=0; i < usuariosDelGrupo.Count();i++){
+                usuariosDelGrupo[i].Resultado = respondioElUsuario[i];
+            }
 
 
             var operationResult = new OperationResult<IEnumerable<UsuarioDelGrupoDTO>>();
@@ -75,6 +82,7 @@ namespace Core.Services
 
         }
 
+       
         public OperationResult<IEnumerable<GruposDelUsuarioDTO>> GetSearchGroups(int id_usuario, string search, int limit, int offset)
         {
             var gruposDelUsuario = context.Usuarios

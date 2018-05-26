@@ -79,14 +79,17 @@ namespace Core.Services
                     preferencias.IdsGastronomia.AddRange(respuestaDeserializada.IdsGastronomia);
 
                 }
-
+                return preferencias;
             }
-            PreferenciasDTO preferenciasResponse = new PreferenciasDTO
+            else
             {
-                Response = false
-            };
+                PreferenciasDTO preferenciasResponse = new PreferenciasDTO
+                {
+                    Response = false
+                };
 
-            return preferenciasResponse;
+                return preferenciasResponse;
+            }
         }
 
         private PreferenciasDTO GetIntersecciones(int id_grupo)

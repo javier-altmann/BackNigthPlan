@@ -6,7 +6,8 @@ namespace Core.DTO
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public string ImagenPerfil { get; set; }
-        public bool RespondioSusPreferencias { get; set; }
+        public bool Resultado { get; set; }
+
 
     }
 }

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Core.Services.ResponseModels;
 using Core.DTO;
+using System;
 
 namespace Core.Services
 {
@@ -48,29 +49,70 @@ namespace Core.Services
             return operation;
         }
 
-        public void SaveUsuarioRegistrado(UsuarioDTO user)
+        public PostResult<UsuarioDTO> SaveUsuarioRegistrado(UsuarioDTO user)
         {
-            var datosDelUsuario = new Usuarios()
+            try
             {
-                IdUsuario = user.IdUsuario,
-                Nombre = user.Nombre,
-                Apellido = user.Apellido,
-                Mail = user.Mail,
-                ImagenPerfil = user.ImagenPerfil,
-                FechaNacimiento = user.FechaNacimiento
-            };
-            context.Usuarios.Add(datosDelUsuario);
-            context.SaveChanges();
+                var datosDelUsuario = new Usuarios()
+                {
+                    IdUsuario = user.IdUsuario,
+                    Nombre = user.Nombre,
+                    Apellido = user.Apellido,
+                    Mail = user.Mail,
+                    ImagenPerfil = user.ImagenPerfil,
+                    FechaNacimiento = user.FechaNacimiento
+                };
+
+                context.Usuarios.Add(datosDelUsuario);
+                context.SaveChanges();
+
+                var responseUsuarios = new PostResult<UsuarioDTO>
+                {
+                    ObjectResult = user,
+                };
+
+                return responseUsuarios;
+
+            }
+            catch (Exception ex)
+            {
+                var responseUsuario = new PostResult<UsuarioDTO>
+                {
+                   MensajePersonalizado = ex.Message,
+                };
+                return responseUsuario;
+            }
+
         }
 
-        public void UpdateUser(UsuarioDTO user)
+        public PostResult<UsuarioDTO> UpdateUser(UsuarioDTO user)
         {
-            var usuario = context.Usuarios.FirstOrDefault();
-            usuario.Nombre = user.Nombre;
-            usuario.Apellido = user.Apellido;
-            usuario.Mail = user.Mail;
-            usuario.FechaNacimiento = user.FechaNacimiento;
-            context.SaveChanges();
+            try
+            {
+                var usuario = context.Usuarios.FirstOrDefault();
+                usuario.Nombre = user.Nombre;
+                usuario.Apellido = user.Apellido;
+                usuario.Mail = user.Mail;
+                usuario.FechaNacimiento = user.FechaNacimiento;
+                context.SaveChanges();
+                var responseUpdateUsuario = new PostResult<UsuarioDTO>
+                {
+                    ObjectResult = user,
+                };
+
+                return responseUpdateUsuario;
+    
+            }
+            catch (Exception ex)
+            {
+                var responseUpdateUsuario = new PostResult<UsuarioDTO>
+                {
+                    MensajePersonalizado = ex.Message
+                };
+                return responseUpdateUsuario;
+            }
+            
+
         }
 
     }

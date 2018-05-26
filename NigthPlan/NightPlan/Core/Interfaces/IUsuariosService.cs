@@ -9,9 +9,9 @@ namespace Core.Interfaces
           LoginResponseApi AutenticarUsuario(string username, string password);
           OperationResult<UsuarioDTO> GetUsuarioFacebook(int id_usuario);
 
-          void SaveUsuarioRegistrado(UsuarioDTO user);
+          PostResult<UsuarioDTO> SaveUsuarioRegistrado(UsuarioDTO user);
 
-          void UpdateUser(UsuarioDTO user);
+          PostResult<UsuarioDTO> UpdateUser(UsuarioDTO user);
 
 
 

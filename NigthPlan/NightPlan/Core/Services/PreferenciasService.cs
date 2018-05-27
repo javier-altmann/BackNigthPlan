@@ -35,14 +35,13 @@ namespace Core.Services
 								}";
                 var estadoDeLasPreferencias = context.EstadoDePreferencias.Where(x => x.IdGrupo == preferenciasUsuario.IdGrupo)
                                       .FirstOrDefault();
-                var preferencias = new RespuestasUsuariosGrupos
+                var preferencias = new RespuestasUsuariosGrupos 
                 {
                     IdUsuario = preferenciasUsuario.IdUsuario,
                     IdGrupo = preferenciasUsuario.IdGrupo,
                     Respuestas = response
 
                 };
-
 
                 var actualizarContadorDePreferencias = new GuardarPreferenciasDTO
                 {
@@ -55,9 +54,8 @@ namespace Core.Services
                 context.RespuestasUsuariosGrupos.Add(preferencias);
                 estadoDeLasPreferencias.ContadorPreferenciasElegidas = actualizarContadorDePreferencias.ContadorDePreferencias;
                 context.SaveChanges();
+
                 return responsePreferencia;
-
-
             }
             catch (Exception ex)
             {

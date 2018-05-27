@@ -12,8 +12,8 @@ namespace Core.Services
 {
     public class EstablecimientosService : IEstablecimientosService
     {
-      private nightPlanContext context;
-      public EstablecimientosService(nightPlanContext context)
+        private nightPlanContext context;
+        public EstablecimientosService(nightPlanContext context)
         {
             this.context = context;
         }
@@ -80,10 +80,10 @@ namespace Core.Services
             {
                 var datosDelEstablecimiento = new Establecimientos
                 {
-                    Nombre = "",
-                    Direccion = "",
-                    Imagen = "",
-                    Destacado = 0
+                    Nombre = establecimiento.Establecimiento.Nombre,
+                    Direccion = establecimiento.Establecimiento.Direccion,
+                    Imagen = establecimiento.Establecimiento.Imagen,
+                    Destacado = establecimiento.Establecimiento.Destacado
                 };
 
                 EstablecimientoBarrios establecimientoBarrio = new EstablecimientoBarrios

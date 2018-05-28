@@ -55,18 +55,21 @@
             <param></param>
             <returns></returns>    
         </member>
-        <member name="M:Api.Controllers.GruposController.Get">
+        <member name="M:Api.Controllers.GruposController.Get(System.Int32,System.String,System.Int32,System.Int32)">
             <summary>
-            Esto es un test
+            Devuelve los grupos que cumplan con el filtro que puso el usuario
             </summary>
-            <param name="Grupos"></param>
+            <param name="id_usuario"></param>
+            <param name="search"></param>
+            <param name="limit"></param>
+            <param name="offset"></param>
             <returns></returns>
         </member>
         <member name="M:Api.Controllers.GruposController.Get(System.Int32)">
             <summary>
-            Esto es un test
+            Devuelve los usuarios que pertenecen al grupo
             </summary>
-            <param name="Grupos"></param>
+            <param name="id"></param>
             <returns></returns>
         </member>
         <member name="M:Api.Controllers.GruposController.Post(Core.DTO.CrearGrupo.GruposDTO)">
@@ -83,11 +86,20 @@
             <param name="preferenciasUsuario"></param>
             <returns></returns>
         </member>
-        <member name="M:Api.Controllers.UsuariosController.Get(System.Int32)">
+        <member name="M:Api.Controllers.UsuariosController.Get(System.String)">
             <summary>
-            Devuelve los datos del usuario 
+            Devuelve los usuarios que coincidan con el email
+            </summary>
+            <param name="email"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Api.Controllers.UsuariosController.Get(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Devuelve los grupos del usuario
             </summary>
             <param name="idUsuario"></param>
+            <param name="limit"></param>
+            <param name="offset"></param>
             <returns></returns>
         </member>
         <member name="M:Api.Controllers.UsuariosController.Post(Core.DTO.UsuarioDTO)">

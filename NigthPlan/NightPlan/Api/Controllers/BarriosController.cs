@@ -1,16 +1,21 @@
+using System.Collections.Generic;
+using Core.DTO;
 using Core.Interfaces;
+using Core.Services.ResponseModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
+    [Route("api/[controller]")]
     public class BarriosController : Controller
     {
-        IGruposService _grupos;
-        public BarriosController(IGruposService grupos)
+        IEstablecimientosService _establecimientos;
+        public BarriosController(IEstablecimientosService establecimientos)
         {
-            _grupos = grupos;
+            _establecimientos = establecimientos;
         }
 
+        
         /// <summary>
         /// Trae todos los barrios
         /// </summary>
@@ -18,10 +23,13 @@ namespace Api.Controllers
         /// <returns></returns>
         // GET api/values
         [HttpGet]
+        [Produces("application/json", Type = typeof(OperationResult<IEnumerable<BarrioDTO>>))]
         public IActionResult Get()
         {
-          
-            return null;
-        }    
+          var barrios = _establecimientos.GetBarrios();
+            return Ok(barrios);
+        } 
+        
+
     }
 }

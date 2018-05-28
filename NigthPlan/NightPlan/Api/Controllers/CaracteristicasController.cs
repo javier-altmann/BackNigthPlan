@@ -1,14 +1,18 @@
+using System.Collections.Generic;
+using Core.DTO;
 using Core.Interfaces;
+using Core.Services.ResponseModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
+    [Route("api/[controller]")]
     public class CaracteristicasController : Controller
     {
-        IGruposService _grupos;
-        public CaracteristicasController(IGruposService grupos)
+        IEstablecimientosService _establecimientos;
+        public CaracteristicasController(IEstablecimientosService establecimientos)
         {
-            _grupos = grupos;
+            _establecimientos = establecimientos;
         }
 
         /// <summary>
@@ -17,10 +21,13 @@ namespace Api.Controllers
         /// <param></param>
         /// <returns></returns>    
         [HttpGet]
+        [Produces("application/json", Type = typeof(OperationResult<IEnumerable<CaracteristicasDTO>>))]
+
         public IActionResult Get()
         {
-          
-            return null;
-        } 
+            var caracteristicas = _establecimientos.GetCaracteristicas();
+            return Ok(caracteristicas);
+        }
+
     }
 }

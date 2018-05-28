@@ -7,7 +7,7 @@ using Core.DTO.CrearGrupo;
 using Core.Interfaces;
 using Core.Services;
 using Core.Services.ResponseModels;
-using DAL.Model;
+//using DAL.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,11 +19,13 @@ namespace Api.Controllers
         IGruposService _grupos;
         IRecomendadosService _recomendaciones;
         IPreferenciasService _preferencias;
-        public ValuesController(IGruposService grupos,IRecomendadosService recomendados,IPreferenciasService preferencias)
+        IVotacionService _votaciones;
+        public ValuesController(IVotacionService votaciones, IGruposService grupos,IRecomendadosService recomendados,IPreferenciasService preferencias)
         {
             _grupos = grupos;
             _recomendaciones = recomendados;
             _preferencias = preferencias;
+            _votaciones = votaciones;
         }
 
         // GET api/values
@@ -42,7 +44,7 @@ namespace Api.Controllers
 
           };
          // _preferencias.GuardarPreferencias(preferences);
-            
+         _votaciones.GetResultadoDeLaVotacion(1);   
             return Ok();
         }
 

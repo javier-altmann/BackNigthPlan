@@ -25,9 +25,10 @@ namespace DAL.Model
         public nightPlanContext(DbContextOptions<nightPlanContext> options)
             : base(options)
         { }
-        /*protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+/* 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured)
+            if (!optionsB   uilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseMySql("Server=localhost;User Id=root;Password=root;Database=nightPlan;port=3306");
@@ -235,6 +236,10 @@ namespace DAL.Model
 
                 entity.Property(e => e.CantidadUsuariosPorGrupo)
                     .HasColumnName("cantidad_usuarios_por_grupo")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.ContadorDeVotos)
+                    .HasColumnName("contador_de_votos")
                     .HasColumnType("int(11)");
 
                 entity.Property(e => e.ContadorPreferenciasElegidas)

@@ -138,6 +138,7 @@ namespace Core.Services
         /*CUANDO CREO UN GRUPO, TENGO QUE INSERTAR EN LA TABLA estado_de_preferencias el id_grupo y 
             cantidad_usuarios_por_grupo(contar la cantidad de usuarios que agrego)
         */
+        
         public CrearGrupoResponseApi CrearGrupo(GruposDTO grupo)
         {
 

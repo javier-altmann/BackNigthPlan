@@ -20,7 +20,7 @@ namespace Core.Services
         ---id_grupo contador_preferencias_elegidas  cantidad_usuarios_por_grupo---
         También cuando se crea un grupo guardo la cantidad de persona que hay en la misma tabla. 
        */
-
+ 
         private nightPlanContext context;
         public PreferenciasService(nightPlanContext context)
         {
@@ -68,6 +68,7 @@ namespace Core.Services
     
 
         }
+        
     }
 
 }

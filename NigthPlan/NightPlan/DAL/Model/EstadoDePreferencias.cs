@@ -9,6 +9,7 @@ namespace DAL.Model
         public int? IdGrupo { get; set; }
         public int? ContadorPreferenciasElegidas { get; set; }
         public int? CantidadUsuariosPorGrupo { get; set; }
+        public int? ContadorDeVotos { get; set; }
 
         public Grupos IdGrupoNavigation { get; set; }
     }

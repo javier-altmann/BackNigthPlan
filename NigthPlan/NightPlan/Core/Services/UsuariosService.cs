@@ -11,6 +11,7 @@ namespace Core.Services
 {
     public class UsuariosService : IUsuariosService
     {
+         
         private nightPlanContext context;
         public UsuariosService(nightPlanContext context)
         {

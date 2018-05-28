@@ -50,7 +50,7 @@ namespace Core.Services
 */
             return null;
         }
-
+ 
         private bool validarSiRespondieronTodosLosUsuariosDelGrupo(int id_grupo)
         {
 

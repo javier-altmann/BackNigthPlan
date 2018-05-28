@@ -49,8 +49,7 @@ namespace Api
             services.AddScoped<IUsuariosService, UsuariosService>();
             services.AddScoped<IRecomendadosService, RecomendacionesService>();
             services.AddScoped<IPreferenciasService, PreferenciasService>();
-
-            
+            services.AddScoped<IVotacionService, VotacionService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

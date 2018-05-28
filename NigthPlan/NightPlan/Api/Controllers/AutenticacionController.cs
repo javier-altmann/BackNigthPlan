@@ -1,10 +1,13 @@
+using Core.Interfaces;
+using Microsoft.AspNetCore.Mvc;
+
 namespace Api.Controllers
 {
     [Route("api/[controller]")]
     public class AutenticacionController
     {
         IUsuariosService _usuarios;
-        public UsuariosController(IUsuariosService usuarios)
+        public AutenticacionController(IUsuariosService usuarios)
         {
             _usuarios = usuarios;
         }

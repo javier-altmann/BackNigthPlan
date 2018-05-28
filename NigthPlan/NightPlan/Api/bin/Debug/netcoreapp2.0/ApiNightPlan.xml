@@ -4,6 +4,133 @@
         <name>Api</name>
     </assembly>
     <members>
+        <member name="M:Api.Controllers.EstablecimientosController.Get(System.Int32,System.Int32)">
+            <summary>
+            Devuelve los establecimientos destacados, según el offset y limit que se pase en los parametros
+            </summary>
+            <param name="offset"></param>
+            <param name="limit"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Api.Controllers.EstablecimientosController.Get(System.Int32)">
+            <summary>
+            Esto es un test
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Api.Controllers.EstablecimientosController.Post(Core.DTO.CrearEstablecimientos.CrearEstablecimientosDTO)">
+            <summary>
+            Crea un establecimiento
+            </summary>
+            <param name="establecimiento"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Api.Controllers.GruposController.Get">
+            <summary>
+            Esto es un test
+            </summary>
+            <param name="Grupos"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Api.Controllers.GruposController.Get(System.Int32)">
+            <summary>
+            Esto es un test
+            </summary>
+            <param name="Grupos"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Api.Controllers.GruposController.Post(System.String)">
+            <summary>
+            Esto es un test
+            </summary>
+            <param name="Grupos"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Api.Controllers.GruposController.Update(System.Int32,System.String)">
+            <summary>
+            Esto es un test
+            </summary>
+            <param name="Grupos"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Api.Controllers.GruposController.Delete(System.Int32)">
+            <summary>
+            Esto es un test
+            </summary>
+            <param name="Grupos"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Api.Controllers.PreferenciasController.Get">
+            <summary>
+            Esto es un test
+            </summary>
+            <param name="Grupos"></param>
+            <returns></returns>   
+        </member>
+        <member name="M:Api.Controllers.PreferenciasController.Get(System.Int32)">
+            <summary>
+            Esto es un test
+            </summary>
+            <param name="Grupos"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Api.Controllers.PreferenciasController.POST(System.String)">
+            <summary>
+            Esto es un test
+            </summary>
+            <param name="Grupos"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Api.Controllers.PreferenciasController.Put(System.Int32,System.String)">
+            <summary>
+            Esto es un test
+            </summary>
+            <param name="Grupos"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Api.Controllers.PreferenciasController.Delete(System.Int32)">
+            <summary>
+            Esto es un test
+            </summary>
+            <param name="Grupos"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Api.Controllers.UsuariosController.Get">
+            <summary>
+            Esto es un test
+            </summary>
+            <param name="Grupos"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Api.Controllers.UsuariosController.Get(System.Int32)">
+            <summary>
+            Esto es un test
+            </summary>
+            <param name="Grupos"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Api.Controllers.UsuariosController.Post(System.String,System.String)">
+            <summary>
+            Esto es un test
+            </summary>
+            <param name="Grupos"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Api.Controllers.UsuariosController.Put(System.Int32,System.String)">
+            <summary>
+            Esto es un test
+            </summary>
+            <param name="Grupos"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Api.Controllers.UsuariosController.Delete(System.Int32)">
+            <summary>
+            Esto es un test
+            </summary>
+            <param name="Grupos"></param>
+            <returns></returns>
+        </member>
         <member name="M:Api.Controllers.ValuesController.Post(Core.DTO.CrearGrupo.GruposDTO)">
             <summary>
             Esto es un test

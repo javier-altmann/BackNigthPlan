@@ -11,7 +11,7 @@ namespace Core.Interfaces
 
           PostResult<UsuarioDTO> SaveUsuarioRegistrado(UsuarioDTO user);
 
-          PostResult<UsuarioDTO> UpdateUser(UsuarioDTO user);
+          PostResult<UsuarioDTO> UpdateUser(int id,UsuarioDTO user);
 
 
 

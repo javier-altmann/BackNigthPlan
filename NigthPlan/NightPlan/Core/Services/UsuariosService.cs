@@ -86,11 +86,12 @@ namespace Core.Services
 
         }
 
-        public PostResult<UsuarioDTO> UpdateUser(UsuarioDTO user)
+        public PostResult<UsuarioDTO> UpdateUser(int id,UsuarioDTO user)
         {
             try
             {
-                var usuario = context.Usuarios.FirstOrDefault();
+                //var usuario = context.Usuarios.FirstOrDefault();
+                var usuario = context.Usuarios.Find(id);
                 usuario.Nombre = user.Nombre;
                 usuario.Apellido = user.Apellido;
                 usuario.Mail = user.Mail;

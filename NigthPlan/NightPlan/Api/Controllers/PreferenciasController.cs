@@ -1,56 +1,29 @@
 using System.Collections.Generic;
+using Core.DTO;
+using Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
     public class PreferenciasController : Controller
     {
-       /*
         IPreferenciasService _prefencias;
-        public GruposController(IPreferenciasService preferencias)
+        public PreferenciasController(IPreferenciasService preferencias)
         {
             _prefencias = preferencias;
         }
-         */
-
-        // GET api/values
-        [HttpGet]
-        public IActionResult Get()
-        {
-          
-            return null;
-        }
-
-
-
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public IActionResult Get(int id)
-        {
-            return null;
-        }
-
+         
+        /// <summary>
+        /// Guarda las preferencias del usuario
+        /// </summary>
+        /// <param name="preferenciasUsuario"></param>
+        /// <returns></returns>
         // POST api/values
         [HttpPost]
-        public  IActionResult POST([FromBody]string value)
+        public IActionResult Post([FromBody]GuardarPreferenciasDTO preferenciasUsuario)
         {
             return null;
         }
-
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody]string value)
-        {
-            return null;
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
-        {
-            return null;
-        }
-        
         
     }
 }

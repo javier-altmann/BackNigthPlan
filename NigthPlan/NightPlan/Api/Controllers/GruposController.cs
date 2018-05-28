@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Core.DTO.CrearGrupo;
 using Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,41 +13,44 @@ namespace Api.Controllers
         {
             _grupos = grupos;
         }
-
-        // GET api/values
+        
+        /// <summary>
+        /// Esto es un test
+        /// </summary>
+        /// <param name="Grupos"></param>
+        /// <returns></returns>
+        // GET api/grupos
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult Get()
         {
           
-            return new  string[] { "value1", "value2" };
+            return null;
         }
 
 
-
-        // GET api/values/5
+        /// <summary>
+        /// Esto es un test
+        /// </summary>
+        /// <param name="Grupos"></param>
+        /// <returns></returns>
+        // GET api/grupos/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult Get(int id)
         {
-            return "value";
+            return null;
         }
 
-        // POST api/values
+        /// <summary>
+        /// Crea el grupo
+        /// </summary>
+        /// <param name="grupo"></param>
+        /// <returns></returns>
+        // POST api/grupos
         [HttpPost]
-        public void CrearGrupo([FromBody]string value)
+        public IActionResult Post([FromBody] GruposDTO grupo)
         {
+            return null;
         }
 
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void ActualizarGrupo(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void EliminarGrupo(int id)
-        {
-        }
-        
     }
 }

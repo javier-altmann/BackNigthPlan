@@ -21,7 +21,6 @@ namespace Core.Services
 
         public OperationResult<IEnumerable<EstablecimientoDTO>> getEstablecimientosDestacados(int offset, int limit)
         {
-
             var establecimientosDestacados = context.Establecimientos.Where(x => x.Destacado == 1)
                                             .Select(y => new EstablecimientoDTO
                                             {

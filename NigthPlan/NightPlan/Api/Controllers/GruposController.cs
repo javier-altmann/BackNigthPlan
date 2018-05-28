@@ -15,13 +15,16 @@ namespace Api.Controllers
         }
         
         /// <summary>
-        /// Esto es un test
+        /// Devuelve los grupos que cumplan con el filtro que puso el usuario
         /// </summary>
-        /// <param name="Grupos"></param>
+        /// <param name="id_usuario"></param>
+        /// <param name="search"></param>
+        /// <param name="limit"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         // GET api/grupos
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult Get(int id_usuario, string search, int limit, int offset)
         {
           
             return null;
@@ -29,12 +32,12 @@ namespace Api.Controllers
 
 
         /// <summary>
-        /// Esto es un test
+        /// Devuelve los usuarios que pertenecen al grupo
         /// </summary>
-        /// <param name="Grupos"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
         // GET api/grupos/5
-        [HttpGet("{id}")]
+        [HttpGet("api/grupos/{id}/usuarios")]
         public IActionResult Get(int id)
         {
             return null;

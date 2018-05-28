@@ -15,16 +15,32 @@ namespace Api.Controllers
         }
 
         /// <summary>
-        /// Devuelve los datos del usuario 
+        /// Devuelve los usuarios que coincidan con el email
         /// </summary>
-        /// <param name="idUsuario"></param>
+        /// <param name="email"></param>
         /// <returns></returns>
-        // GET api/usuarios/5
-        [HttpGet("{id}")]
-        public IActionResult Get(int idUsuario)
+        // GET api/usuarios
+        [HttpGet("api/usuarios")]
+        public IActionResult Get(string email)
         {
             return null;
         }
+
+
+        /// <summary>
+        /// Devuelve los grupos del usuario
+        /// </summary>
+        /// <param name="idUsuario"></param>
+        /// <param name="limit"></param>
+        /// <param name="offset"></param>
+        /// <returns></returns>
+        // GET api/usuarios/5/grupos
+        [HttpGet("api/usuarios/{id}/grupos")]
+        public IActionResult Get(int idUsuario,int limit, int offset)
+        {
+            return null;
+        }
+
 
         /// <summary>
         /// Guardar los datos del usuario 

@@ -114,7 +114,6 @@ namespace Core.Services
             return operationResult;
 
         }
-        // Habría que ver como hacer un metodo para que a medida que escriba le sugiera distintos usuarios
         public OperationResult<IEnumerable<UsuarioDTO>> getUsuarios(string email)
         {
             var listaDeUsuarios = context.Usuarios.Where(x => x.Mail == email)

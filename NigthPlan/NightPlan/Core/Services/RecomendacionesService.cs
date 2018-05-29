@@ -36,6 +36,8 @@ namespace Core.Services
     
             }
             //4. En caso de que traiga datos: Hacer algoritmo para recomendar lugares 
+            //GUARDAR EN RECOMENDADOS LA QUERY CON LOS RECOMENDADOS
+            var recomendados = "";
 /* 
             SELECT establecimientos.id_establecimiento,establecimientos.nombre,establecimientos.direccion,establecimientos.imagen
             FROM establecimientos

@@ -4,7 +4,7 @@ namespace Core.Interfaces
 {
     public interface IRecomendadosService
     {
-        EstablecimientoDTO getLugaresRecomendados();   
+        EstablecimientoDTO getLugaresRecomendados(int id_grupo);   
 
     }
 }

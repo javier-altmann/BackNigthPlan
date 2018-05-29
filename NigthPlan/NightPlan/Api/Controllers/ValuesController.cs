@@ -44,7 +44,8 @@ namespace Api.Controllers
 
           };
          // _preferencias.GuardarPreferencias(preferences);
-         _votaciones.GetResultadoDeLaVotacion(1);   
+        // _votaciones.GetResultadoDeLaVotacion(1);   
+        _recomendaciones.getLugaresRecomendados(1);
             return Ok();
         }
 

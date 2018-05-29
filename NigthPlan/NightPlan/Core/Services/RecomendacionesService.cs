@@ -59,7 +59,7 @@ namespace Core.Services
         private bool validarSiRespondieronTodosLosUsuariosDelGrupo(int id_grupo)
         {
 
-            //1.Hago query para obtener cuántos usuarios pertenecen al grupo y cuántos respondieron sus preferencias. 
+            //1.Hago query para obten1er cuántos usuarios pertenecen al grupo y cuántos respondieron sus preferencias. 
 
             var EstadoDePreferencias = context.EstadoDePreferencias.Where(x => x.IdGrupo == id_grupo)
                                                      .Select(x => new EstadoDePreferenciasDTO

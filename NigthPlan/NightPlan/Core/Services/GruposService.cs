@@ -67,7 +67,12 @@ namespace Core.Services
             
 
             for(int i=0; i < usuariosDelGrupo.Count();i++){
+                //Esta validación la hago por si no llega haber algun dato en la tabla de respuestas_usuarios_grupos
+                if(respondioElUsuario.Any()){
                 usuariosDelGrupo[i].Resultado = respondioElUsuario[i];
+                }else{
+                    usuariosDelGrupo[i].Resultado = false;
+                }
             }
 
 

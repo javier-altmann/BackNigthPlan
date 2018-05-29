@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using Core.DTO;
 using Core.DTO.CrearGrupo;
 using Core.Interfaces;
+using Core.Services.ResponseModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
@@ -24,13 +26,19 @@ namespace Api.Controllers
         /// <returns></returns>
         // GET api/grupos
         [HttpGet]
+        [ProducesResponseType(200, Type = typeof(OperationResult<IEnumerable<GruposDelUsuarioDTO>>))]
+
         public IActionResult Get(int id_usuario, string search, int limit, int offset)
         {
-            var test = _grupos.GetSearchGroups(id_usuario,search,limit,offset);
-            if(test.ObjectResult == null){
-                return BadRequest(test);
+            var resultadoDeBuscador = _grupos.GetSearchGroups(id_usuario,search,limit,offset);
+
+            if(resultadoDeBuscador.ObjectResult == null){
+                return NotFound(resultadoDeBuscador);
+            }else if(!ModelState.IsValid){
+                return BadRequest(ModelState);
+            }else{
+            return Ok(resultadoDeBuscador);
             }
-            return Ok(test);
         }
 
 
@@ -39,11 +47,18 @@ namespace Api.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        // GET api/grupos/5
-        [HttpGet("api/grupos/{id}/usuarios")]
+        // GET api/grupos/5/usuarios
+        [HttpGet("{id}/usuarios")]
         public IActionResult Get(int id)
         {
-            return null;
+            var usuariosDelGrupo = _grupos.GetUsuariosDelGrupos(id);
+            if(usuariosDelGrupo.ObjectResult == null){
+                return NotFound(usuariosDelGrupo);
+            }else if(!ModelState.IsValid){
+                return BadRequest(ModelState);
+            }else{
+            return Ok(usuariosDelGrupo);
+            }
         }
 
         /// <summary>

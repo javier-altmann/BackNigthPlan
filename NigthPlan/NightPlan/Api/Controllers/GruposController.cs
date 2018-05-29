@@ -26,8 +26,11 @@ namespace Api.Controllers
         [HttpGet]
         public IActionResult Get(int id_usuario, string search, int limit, int offset)
         {
-          
-            return null;
+            var test = _grupos.GetSearchGroups(id_usuario,search,limit,offset);
+            if(test.ObjectResult == null){
+                return BadRequest(test);
+            }
+            return Ok(test);
         }
 
 

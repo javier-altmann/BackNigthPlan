@@ -26,12 +26,15 @@ namespace Core.Services
             this.context = context;
         }
 
-        public EstablecimientoDTO getLugaresRecomendados()
+        public EstablecimientoDTO getLugaresRecomendados(int id_grupo)
         {
             //1. Traigo las intersecciones
-            //var test = GetIntersecciones();
+            var listaDeIntersecciones = GetIntersecciones(id_grupo);
             //2. Validar si la Response fue false 
+            if(!listaDeIntersecciones.Response){
             //3. En caso de que si responder que todavía no se puede
+    
+            }
             //4. En caso de que traiga datos: Hacer algoritmo para recomendar lugares 
 /* 
             SELECT establecimientos.id_establecimiento,establecimientos.nombre,establecimientos.direccion,establecimientos.imagen

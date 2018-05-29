@@ -174,7 +174,8 @@ namespace Core.Services
                 {
                     CantidadUsuariosPorGrupo = cantidadDeUsuarios,
                     IdGrupo = grupos.IdGrupo,
-                    ContadorPreferenciasElegidas = 0
+                    ContadorPreferenciasElegidas = 0,
+                    ContadorDeVotos = 0
                 };
                 context.Add(estadoDePreferencias);
 

@@ -70,7 +70,15 @@ namespace Api.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] GruposDTO grupo)
         {
-            return null;
+            var nuevoGrupo = _grupos.CrearGrupo(grupo);
+            if(nuevoGrupo.Succes){
+                return Ok(nuevoGrupo);
+            }else if(!ModelState.IsValid){
+                return BadRequest(ModelState);
+            }else{
+                return NotFound(nuevoGrupo);
+            }
+            
         }
 
     }

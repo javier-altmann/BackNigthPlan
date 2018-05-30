@@ -47,8 +47,8 @@ namespace Api.Controllers
         public IActionResult Get(int id,int limit, int offset)
         {
             var gruposDelUsuario = _grupos.GetGruposDelUsuario(id,limit,offset);
-            if(gruposDelUsuario == null){
-                return NotFound();
+            if(gruposDelUsuario.ObjectResult == null){
+                return NotFound(gruposDelUsuario);
             }
             return Ok(gruposDelUsuario);
         }

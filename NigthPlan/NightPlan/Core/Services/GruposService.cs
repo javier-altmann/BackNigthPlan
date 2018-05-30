@@ -143,11 +143,10 @@ namespace Core.Services
             cantidad_usuarios_por_grupo(contar la cantidad de usuarios que agrego)
         */
         
-        public CrearGrupoResponseApi CrearGrupo(GruposDTO grupo)
+        public ResponseCrearGrupoDTO CrearGrupo(GruposDTO grupo)
         {
-
             var fechaString = DateTime.Today.ToString();
-            //Guardo dentro de fechaSinHora la fecha con formato Dia-Mes-Año
+            //Guardo dentro de fechaSinHora la fec1ha con formato Dia-Mes-Año
             var fechaSinHora = fechaString.Split(' ').FirstOrDefault().Replace("/", "-");
             try
             {
@@ -180,13 +179,24 @@ namespace Core.Services
                 context.Add(estadoDePreferencias);
 
                 context.SaveChanges();
+                var ObjectResult = new ResponseCrearGrupoDTO{
+                    Grupos = grupos,
+                    GruposDelUsuario = usuarios,
+                    EstadoDePreferencias = estadoDePreferencias,
+                    Message = "El grupo se creo correctamente",
+                    Succes = true
+                };
+                return ObjectResult;
             }
             catch (Exception ex)
             {
-                return new CrearGrupoResponseApi(false, "Fallo al guardar los datos del grupo");
+                var ObjectResult = new ResponseCrearGrupoDTO{
+                    Message = "Hubo un error al guardar los datos" + ex.ToString(),
+                    Succes = false
+                };
+                return ObjectResult;
             }
 
-            return new CrearGrupoResponseApi(true, "Se guardo el grupo exitosamente");
         }
 
     }

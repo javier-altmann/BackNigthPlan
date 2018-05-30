@@ -20,7 +20,7 @@ namespace Core.Interfaces
     
         OperationResult<IEnumerable<UsuarioDTO>> getUsuarios(string email);
 
-        CrearGrupoResponseApi CrearGrupo(GruposDTO grupo);
+        ResponseCrearGrupoDTO CrearGrupo(GruposDTO grupo);
 
        
     }

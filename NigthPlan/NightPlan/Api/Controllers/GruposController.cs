@@ -27,6 +27,7 @@ namespace Api.Controllers
         // GET api/grupos
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(OperationResult<IEnumerable<GruposDelUsuarioDTO>>))]
+        [ProducesResponseType(404, Type = typeof(OperationResult<IEnumerable<GruposDelUsuarioDTO>>))]
 
         public IActionResult Get(int id_usuario, string search, int limit, int offset)
         {
@@ -49,6 +50,8 @@ namespace Api.Controllers
         /// <returns></returns>
         // GET api/grupos/5/usuarios
         [HttpGet("{id}/usuarios")]
+        [ProducesResponseType(200, Type = typeof(OperationResult<IEnumerable<UsuarioDelGrupoDTO>>))]
+        [ProducesResponseType(404, Type = typeof(OperationResult<IEnumerable<UsuarioDelGrupoDTO>>))]
         public IActionResult Get(int id)
         {
             var usuariosDelGrupo = _grupos.GetUsuariosDelGrupos(id);
@@ -68,6 +71,8 @@ namespace Api.Controllers
         /// <returns></returns>
         // POST api/grupos
         [HttpPost]
+        [ProducesResponseType(200, Type = typeof(ResponseCrearGrupoDTO))]
+        [ProducesResponseType(404, Type = typeof(ResponseCrearGrupoDTO))]
         public IActionResult Post([FromBody] GruposDTO grupo)
         {
             var nuevoGrupo = _grupos.CrearGrupo(grupo);

@@ -18,7 +18,7 @@ namespace Core.Interfaces
         // Filtra los grupos del usuario según lo que se ingrese en el buscador
         OperationResult<IEnumerable<GruposDelUsuarioDTO>> GetSearchGroups(int id_usuario, string search, int limit, int offset);
     
-        OperationResult<IEnumerable<UsuarioDTO>> getUsuarios(string email);
+        OperationResult<IEnumerable<ResponseUsuarioDTO>> getUsuarios(string email);
 
         CrearGrupoResponseApi CrearGrupo(GruposDTO grupo);
 

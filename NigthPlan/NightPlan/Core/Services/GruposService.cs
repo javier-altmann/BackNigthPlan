@@ -123,16 +123,16 @@ namespace Core.Services
             return operationResult;
 
         }
-        public OperationResult<IEnumerable<UsuarioDTO>> getUsuarios(string email)
+        public OperationResult<IEnumerable<ResponseUsuarioDTO>> getUsuarios(string email)
         {
             var listaDeUsuarios = context.Usuarios.Where(x => x.Mail == email)
-                                                  .Select(user => new UsuarioDTO()
+                                                  .Select(user => new ResponseUsuarioDTO()
                                                   {
                                                       Mail = user.Mail,
                                                       IdUsuario = user.IdUsuario
 
                                                   }).ToList();
-            OperationResult<IEnumerable<UsuarioDTO>> operationResult = new OperationResult<IEnumerable<UsuarioDTO>>();
+            var operationResult = new OperationResult<IEnumerable<ResponseUsuarioDTO>>();
             if (listaDeUsuarios.Any())
             {
                 operationResult.ObjectResult = listaDeUsuarios;

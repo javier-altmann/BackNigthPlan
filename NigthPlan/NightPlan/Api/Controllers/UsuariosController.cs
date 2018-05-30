@@ -9,9 +9,11 @@ namespace Api.Controllers
     public class UsuariosController : Controller
     {
         IUsuariosService _usuarios;
-        public UsuariosController(IUsuariosService usuarios)
+        IGruposService _grupos;
+        public UsuariosController(IUsuariosService usuarios, IGruposService grupos)
         {
             _usuarios = usuarios;
+            _grupos = grupos;
         }
 
         /// <summary>
@@ -20,10 +22,14 @@ namespace Api.Controllers
         /// <param name="email"></param>
         /// <returns></returns>
         // GET api/usuarios
-        [HttpGet("api/usuarios")]
+        [HttpGet]
         public IActionResult Get(string email)
         {
-            return null;
+            var usuarios = _grupos.getUsuarios(email);
+            if(usuarios.ObjectResult == null){
+                return NotFound(usuarios);
+            }
+            return Ok(usuarios.ObjectResult);
         }
 
 
@@ -35,7 +41,7 @@ namespace Api.Controllers
         /// <param name="offset"></param>
         /// <returns></returns>
         // GET api/usuarios/5/grupos
-        [HttpGet("api/usuarios/{id}/grupos")]
+        [HttpGet("{id}/grupos")]
         public IActionResult Get(int idUsuario,int limit, int offset)
         {
             return null;

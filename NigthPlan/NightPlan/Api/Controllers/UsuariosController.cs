@@ -23,6 +23,8 @@ namespace Api.Controllers
         /// <returns></returns>
         // GET api/usuarios
         [HttpGet]
+        [ProducesResponseType(200, Type = typeof(string))]
+        [ProducesResponseType(404, Type = typeof(string))]
         public IActionResult Get(string email)
         {
             var usuarios = _grupos.getUsuarios(email);
@@ -36,15 +38,19 @@ namespace Api.Controllers
         /// <summary>
         /// Devuelve los grupos del usuario
         /// </summary>
-        /// <param name="idUsuario"></param>
+        /// <param name="id"></param>
         /// <param name="limit"></param>
         /// <param name="offset"></param>
         /// <returns></returns>
         // GET api/usuarios/5/grupos
         [HttpGet("{id}/grupos")]
-        public IActionResult Get(int idUsuario,int limit, int offset)
+        public IActionResult Get(int id,int limit, int offset)
         {
-            return null;
+            var gruposDelUsuario = _grupos.GetGruposDelUsuario(id,limit,offset);
+            if(gruposDelUsuario == null){
+                return NotFound();
+            }
+            return Ok(gruposDelUsuario);
         }
 
 
@@ -55,9 +61,19 @@ namespace Api.Controllers
         /// <returns></returns>
         // POST api/usuarios
         [HttpPost]
+        [ProducesResponseType(200, Type = typeof(UsuarioDTO))]
+        [ProducesResponseType(404, Type = typeof(UsuarioDTO))]
+        [ProducesResponseType(400, Type = typeof(UsuarioDTO))]
         public IActionResult Post([FromBody]UsuarioDTO user)
         {
-            return null;
+            var usuario = _usuarios.SaveUsuarioRegistrado(user);
+            if(user == null){
+                return NotFound(user);
+            }else if(!ModelState.IsValid){
+                return BadRequest(ModelState);
+            }else{
+                return Created("",user);
+            }
         }
 
         /// <summary>
@@ -68,9 +84,19 @@ namespace Api.Controllers
         /// <returns></returns>
         // PUT api/usuarios/5
         [HttpPut("{id}")]
+        [ProducesResponseType(204, Type = typeof(UsuarioDTO))]
+        [ProducesResponseType(404, Type = typeof(UsuarioDTO))]
+        [ProducesResponseType(400, Type = typeof(UsuarioDTO))]
         public IActionResult Put(int id, [FromBody]UsuarioDTO user)
         {
-            return null;
+            var usuario = _usuarios.UpdateUser(id,user);
+            if(user == null){
+                return NotFound(user);
+            }else if(!ModelState.IsValid){
+                return BadRequest(ModelState);
+            }else{
+                return NoContent();
+            }
         }
 
     }

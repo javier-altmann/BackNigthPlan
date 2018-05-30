@@ -90,7 +90,6 @@ namespace Core.Services
         {
             try
             {
-                //var usuario = context.Usuarios.FirstOrDefault();
                 var usuario = context.Usuarios.Find(id);
                 usuario.Nombre = user.Nombre;
                 usuario.Apellido = user.Apellido;

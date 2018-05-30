@@ -26,7 +26,11 @@ namespace Api.Controllers
         public IActionResult Get()
         {
             var caracteristicas = _establecimientos.GetCaracteristicas();
+            if(caracteristicas == null){
+                return NotFound(caracteristicas);
+            }
             return Ok(caracteristicas);
+            
         }
 
     }

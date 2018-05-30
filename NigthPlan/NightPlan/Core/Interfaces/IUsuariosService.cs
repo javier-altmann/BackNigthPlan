@@ -6,7 +6,7 @@ namespace Core.Interfaces
 {
     public interface IUsuariosService
     {
-          LoginResponseApi AutenticarUsuario(string username, string password);
+          LoginResponseApi AutenticarUsuario(LoginDTO usuario);
           OperationResult<UsuarioDTO> GetUsuarioFacebook(int id_usuario);
 
           PostResult<UsuarioDTO> SaveUsuarioRegistrado(UsuarioDTO user);

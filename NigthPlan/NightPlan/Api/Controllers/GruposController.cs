@@ -71,15 +71,15 @@ namespace Api.Controllers
         /// <returns></returns>
         // POST api/grupos
         [HttpPost]
-        [ProducesResponseType(200, Type = typeof(ResponseCrearGrupoDTO))]
-        [ProducesResponseType(404, Type = typeof(ResponseCrearGrupoDTO))]
+       
+
         public IActionResult Post([FromBody] GruposDTO grupo)
         {
             var nuevoGrupo = _grupos.CrearGrupo(grupo);
-            if(!ModelState.IsValid){
+            if(!ModelState.IsValid || grupo.usuarios.Length == 0){
                 return BadRequest(ModelState);                
             }else if(nuevoGrupo.Succes){
-                return Ok(nuevoGrupo);
+                return Created("api/grupos/",nuevoGrupo);
             }else{
                 return NotFound(nuevoGrupo);
             }

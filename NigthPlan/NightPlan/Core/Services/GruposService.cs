@@ -50,8 +50,8 @@ namespace Core.Services
 
         public OperationResult<IEnumerable<UsuarioDelGrupoDTO>> GetUsuariosDelGrupos(int id_grupo)
         {
-            
-            List<bool> respondioElUsuario = context.RespuestasUsuariosGrupos.Where(x=>x.IdGrupo == id_grupo).Select(x=>x.Respondio).ToList();
+
+            List<bool> respondioElUsuario = context.RespuestasUsuariosGrupos.Where(x => x.IdGrupo == id_grupo).Select(x => x.Respondio).ToList();
             List<UsuarioDelGrupoDTO> usuariosDelGrupo = context.Grupos.Where(x => x.IdGrupo == id_grupo)
                                           .Include(x => x.GruposUsuarios)
                                           .SelectMany(x => x.GruposUsuarios)
@@ -64,13 +64,17 @@ namespace Core.Services
                                               ImagenPerfil = x.IdUsuariosNavigation.ImagenPerfil
 
                                           }).OrderBy(x => x.IdUsuario).ToList();
-            
 
-            for(int i=0; i < usuariosDelGrupo.Count();i++){
+
+            for (int i = 0; i < usuariosDelGrupo.Count(); i++)
+            {
                 //Esta validación la hago por si no llega haber algun dato en la tabla de respuestas_usuarios_grupos
-                if(respondioElUsuario.Any()){
-                usuariosDelGrupo[i].Resultado = respondioElUsuario[i];
-                }else{
+                if (respondioElUsuario.Any())
+                {
+                    usuariosDelGrupo[i].Resultado = respondioElUsuario[i];
+                }
+                else
+                {
                     usuariosDelGrupo[i].Resultado = false;
                 }
             }
@@ -87,7 +91,7 @@ namespace Core.Services
 
         }
 
-       
+
         public OperationResult<IEnumerable<GruposDelUsuarioDTO>> GetSearchGroups(int id_usuario, string search, int limit, int offset)
         {
             var gruposDelUsuario = context.Usuarios
@@ -142,8 +146,8 @@ namespace Core.Services
         /*CUANDO CREO UN GRUPO, TENGO QUE INSERTAR EN LA TABLA estado_de_preferencias el id_grupo y 
             cantidad_usuarios_por_grupo(contar la cantidad de usuarios que agrego)
         */
-        
-        public ResponseCrearGrupoDTO CrearGrupo(GruposDTO grupo)
+
+        public CrearGrupoResponseApi CrearGrupo(GruposDTO grupo)
         {
             var fechaString = DateTime.Today.ToString();
             //Guardo dentro de fechaSinHora la fec1ha con formato Dia-Mes-Año
@@ -179,22 +183,14 @@ namespace Core.Services
                 context.Add(estadoDePreferencias);
 
                 context.SaveChanges();
-                var ObjectResult = new ResponseCrearGrupoDTO{
-                    Grupos = grupos,
-                    GruposDelUsuario = usuarios,
-                    EstadoDePreferencias = estadoDePreferencias,
-                    Message = "El grupo se creo correctamente",
-                    Succes = true
-                };
-                return ObjectResult;
+                return new CrearGrupoResponseApi(true, "Se guardo el grupo exitosamente");
+
+
             }
             catch (Exception ex)
             {
-                var ObjectResult = new ResponseCrearGrupoDTO{
-                    Message = "Hubo un error al guardar los datos" + ex.ToString(),
-                    Succes = false
-                };
-                return ObjectResult;
+                return new CrearGrupoResponseApi(false, "Fallo al guardar los datos del grupo");
+
             }
 
         }

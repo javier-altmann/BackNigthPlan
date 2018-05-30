@@ -1,10 +1,11 @@
+using Core.DTO;
 using Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
     [Route("api/[controller]")]
-    public class AutenticacionController
+    public class AutenticacionController : Controller
     {
         IUsuariosService _usuarios;
         public AutenticacionController(IUsuariosService usuarios)
@@ -20,9 +21,17 @@ namespace Api.Controllers
         /// <returns></returns>
         // POST api/autenticacion
         [HttpPost]
-        public IActionResult Post([FromBody]string username,string password)
+        public IActionResult Post([FromBody]LoginDTO user)
         {
-            return null;
+            var usuario = _usuarios.AutenticarUsuario(user);
+        
+            if(usuario == null){
+                return NotFound(usuario);
+            }else if(!ModelState.IsValid){
+                return BadRequest(ModelState);
+            }else{
+            return Ok(usuario);
+            }
         }
 
        

@@ -27,6 +27,9 @@ namespace Api.Controllers
         public IActionResult Get()
         {
           var gastronomia = _establecimientos.GetGastronomia();
+          if(gastronomia == null){
+              NotFound(gastronomia);
+          }
             return Ok(gastronomia);
         } 
         

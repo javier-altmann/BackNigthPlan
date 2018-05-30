@@ -19,11 +19,11 @@ namespace Core.Services
         }
 
 
-        public LoginResponseApi AutenticarUsuario(string username, string password)
+        public LoginResponseApi AutenticarUsuario(LoginDTO usuario)
         {
-            bool autenticacionResponse = context.UsuariosAdministradores.Any(x => x.Username == username && x.Password == password);
+            bool autenticacionResponse = context.UsuariosAdministradores.Any(x => x.Username == usuario.Username && x.Password == usuario.Password);
 
-            return autenticacionResponse ? new LoginResponseApi(true) :
+            return autenticacionResponse ? new LoginResponseApi(true,"El usuario es correcto") :
                 new LoginResponseApi(false, "El usuario o contraseña es incorrecto");
 
         }

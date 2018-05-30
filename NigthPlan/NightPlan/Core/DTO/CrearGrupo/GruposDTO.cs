@@ -7,6 +7,7 @@ namespace Core.DTO.CrearGrupo
         [Required]
         public string NombreDelGrupo { get; set; }
         public string Imagen { get; set; }
+
         [Required(ErrorMessage="El campo idUsuario es obligatorio")]
         public UsuariosGrupoDTO[] usuarios { get; set; }
 

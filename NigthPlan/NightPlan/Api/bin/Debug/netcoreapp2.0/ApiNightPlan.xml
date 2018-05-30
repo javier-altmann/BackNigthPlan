@@ -4,7 +4,7 @@
         <name>Api</name>
     </assembly>
     <members>
-        <member name="M:Api.Controllers.AutenticacionController.Post(System.String,System.String)">
+        <member name="M:Api.Controllers.AutenticacionController.Post(Core.DTO.LoginDTO)">
             <summary>
             Devuelve un true o false dependiendo de si el usuario y contraseña estan correctos
             </summary>

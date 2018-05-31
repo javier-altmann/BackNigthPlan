@@ -15,7 +15,7 @@ namespace Api.Controllers
         {
             _grupos = grupos;
         }
-        
+
         /// <summary>
         /// Devuelve los grupos que cumplan con el filtro que puso el usuario
         /// </summary>
@@ -31,14 +31,19 @@ namespace Api.Controllers
 
         public IActionResult Get(int id_usuario, string search, int limit, int offset)
         {
-            var resultadoDeBuscador = _grupos.GetSearchGroups(id_usuario,search,limit,offset);
+            var resultadoDeBuscador = _grupos.GetSearchGroups(id_usuario, search, limit, offset);
 
-            if(resultadoDeBuscador.ObjectResult == null){
+            if (resultadoDeBuscador.ObjectResult == null)
+            {
                 return NotFound(resultadoDeBuscador);
-            }else if(!ModelState.IsValid){
+            }
+            else if (!ModelState.IsValid)
+            {
                 return BadRequest(ModelState);
-            }else{
-            return Ok(resultadoDeBuscador);
+            }
+            else
+            {
+                return Ok(resultadoDeBuscador);
             }
         }
 
@@ -55,12 +60,17 @@ namespace Api.Controllers
         public IActionResult Get(int id)
         {
             var usuariosDelGrupo = _grupos.GetUsuariosDelGrupos(id);
-            if(usuariosDelGrupo.ObjectResult == null){
+            if (usuariosDelGrupo.ObjectResult == null)
+            {
                 return NotFound(usuariosDelGrupo);
-            }else if(!ModelState.IsValid){
+            }
+            else if (!ModelState.IsValid)
+            {
                 return BadRequest(ModelState);
-            }else{
-            return Ok(usuariosDelGrupo);
+            }
+            else
+            {
+                return Ok(usuariosDelGrupo);
             }
         }
 
@@ -71,19 +81,24 @@ namespace Api.Controllers
         /// <returns></returns>
         // POST api/grupos
         [HttpPost]
-       
+
 
         public IActionResult Post([FromBody] GruposDTO grupo)
         {
             var nuevoGrupo = _grupos.CrearGrupo(grupo);
-            if(!ModelState.IsValid || grupo.usuarios.Length == 0){
-                return BadRequest(ModelState);                
-            }else if(nuevoGrupo.Succes){
-                return Created("api/grupos/",nuevoGrupo);
-            }else{
+            if (!ModelState.IsValid || grupo.usuarios.Length == 0)
+            {
+                return BadRequest(ModelState);
+            }
+            else if (nuevoGrupo.Succes)
+            {
+                return Created("api/grupos/", nuevoGrupo);
+            }
+            else
+            {
                 return NotFound(nuevoGrupo);
             }
-            
+
         }
 
     }

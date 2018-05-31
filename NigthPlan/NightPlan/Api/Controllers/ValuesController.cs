@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Core.DTO;
+using Core.DTO.CrearEstablecimientos;
 using Core.DTO.CrearGrupo;
 using Core.Interfaces;
 using Core.Services;
@@ -20,12 +21,14 @@ namespace Api.Controllers
         IRecomendadosService _recomendaciones;
         IPreferenciasService _preferencias;
         IVotacionService _votaciones;
-        public ValuesController(IVotacionService votaciones, IGruposService grupos,IRecomendadosService recomendados,IPreferenciasService preferencias)
+        IEstablecimientosService _establecimientos;
+        public ValuesController(IEstablecimientosService establecimientos, IVotacionService votaciones, IGruposService grupos,IRecomendadosService recomendados,IPreferenciasService preferencias)
         {
             _grupos = grupos;
             _recomendaciones = recomendados;
             _preferencias = preferencias;
             _votaciones = votaciones;
+            _establecimientos = establecimientos;
         }
 
         // GET api/values
@@ -45,7 +48,9 @@ namespace Api.Controllers
           };
          // _preferencias.GuardarPreferencias(preferences);
         // _votaciones.GetResultadoDeLaVotacion(1);   
-        _recomendaciones.getLugaresRecomendados(1);
+        //_recomendaciones.getLugaresRecomendados(1);
+       
+
             return Ok();
         }
 

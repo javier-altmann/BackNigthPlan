@@ -1,8 +1,10 @@
+using System.Collections.Generic;
+
 namespace Core.DTO.CrearEstablecimientos
 {
     public class EstablecimientoGastronomiaDTO
     {
-        public int IdGastronomia { get; set; }
+        public List<int> IdGastronomia { get; set; }
         public int IdEstablecimiento { get; set; }
         
     }

@@ -8,7 +8,7 @@ namespace Core.Interfaces
 {
     public interface IEstablecimientosService
     {
-         OperationResult<IEnumerable<EstablecimientoDTO>> getEstablecimientosDestacados(int offset, int limit);
+         OperationResult<IEnumerable<EstablecimientoDTO>> getEstablecimientosDestacados(int limit,int offset);
          IEnumerable<CaracteristicasDTO> GetCaracteristicas();
          IEnumerable<BarrioDTO> GetBarrios();
          IEnumerable<GastronomiaDTO> GetGastronomia();

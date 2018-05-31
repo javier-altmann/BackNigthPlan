@@ -7,5 +7,8 @@ namespace Core.DTO.CrearEstablecimientos
         public EstablecimientoCaracteristicasDTO Caracteristicas { get; set; }
         public EstablecimientoDTO Establecimiento { get; set; }
 
+
+        
+
     }
 }

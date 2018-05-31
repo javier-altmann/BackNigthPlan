@@ -22,21 +22,15 @@ namespace Api.Controllers
         /// <returns></returns>
         // GET api/values
         [HttpGet]
-        public IActionResult Get(int limit,int offset)
+        public IActionResult Get(int limit, int offset)
         {
-            return null;
-        }
+            var establecimientosDestacados = _establecimientos.getEstablecimientosDestacados(limit, offset);
+            if (establecimientosDestacados.ObjectResult == null)
+            {
+                NotFound(establecimientosDestacados);
+            }
+            return Ok(establecimientosDestacados);
 
-        /// <summary>
-        /// Esto es un test
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public IActionResult Get(int id)
-        {
-            return null;
         }
 
         /// <summary>
@@ -48,8 +42,24 @@ namespace Api.Controllers
         [HttpPost]
         public IActionResult Post([FromBody]CrearEstablecimientosDTO establecimiento)
         {
-            return null;
+
+            var establecimientoNuevo = _establecimientos.CrearEstablecimientos(establecimiento);
+            /* 
+            if (establecimientoNuevo.ObjectResult == null)
+            {
+                return NotFound(establecimientoNuevo);
+            }
+            else if (ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            else
+            {
+                return Created("", establecimientoNuevo);
+            }
+            */
+            return Ok(establecimiento);
         }
-        
+
     }
 }

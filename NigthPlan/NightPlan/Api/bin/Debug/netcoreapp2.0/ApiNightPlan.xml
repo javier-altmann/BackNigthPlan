@@ -34,13 +34,6 @@
             <param name="offset"></param>
             <returns></returns>
         </member>
-        <member name="M:Api.Controllers.EstablecimientosController.Get(System.Int32)">
-            <summary>
-            Esto es un test
-            </summary>
-            <param name="id"></param>
-            <returns></returns>
-        </member>
         <member name="M:Api.Controllers.EstablecimientosController.Post(Core.DTO.CrearEstablecimientos.CrearEstablecimientosDTO)">
             <summary>
             Crea un establecimiento

@@ -44,7 +44,7 @@ namespace Api.Controllers
         {
 
             var establecimientoNuevo = _establecimientos.CrearEstablecimientos(establecimiento);
-            /* 
+             
             if (establecimientoNuevo.ObjectResult == null)
             {
                 return NotFound(establecimientoNuevo);
@@ -57,8 +57,8 @@ namespace Api.Controllers
             {
                 return Created("", establecimientoNuevo);
             }
-            */
-            return Ok(establecimiento);
+            
+            
         }
 
     }

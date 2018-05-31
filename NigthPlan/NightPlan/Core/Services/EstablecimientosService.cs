@@ -19,10 +19,10 @@ namespace Core.Services
         }
 
 
-        public OperationResult<IEnumerable<EstablecimientoDTO>> getEstablecimientosDestacados(int limit, int offset)
+        public OperationResult<IEnumerable<EstablecimientoDestacadosDTO>> getEstablecimientosDestacados(int limit, int offset)
         {
             var establecimientosDestacados = context.Establecimientos.Where(x => x.Destacado == 1)
-                                            .Select(y => new EstablecimientoDTO
+                                            .Select(y => new EstablecimientoDestacadosDTO
                                             {
                                                 IdEstablecimiento = y.IdEstablecimiento,
                                                 Nombre = y.Nombre,
@@ -32,7 +32,7 @@ namespace Core.Services
                                             }).OrderBy(ordenar => ordenar.IdEstablecimiento)
                                             .Take(limit).Skip(offset).ToList();
             //Cambiar el harcode de Take y Skip. Hacer una clase paginacion
-            var operationResult = new OperationResult<IEnumerable<EstablecimientoDTO>>();
+            var operationResult = new OperationResult<IEnumerable<EstablecimientoDestacadosDTO>>();
 
             if (!establecimientosDestacados.Any())
             {

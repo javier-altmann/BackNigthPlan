@@ -42,14 +42,13 @@ namespace Api.Controllers
         [HttpPost]
         public IActionResult Post([FromBody]CrearEstablecimientosDTO establecimiento)
         {
-
             var establecimientoNuevo = _establecimientos.CrearEstablecimientos(establecimiento);
              
             if (establecimientoNuevo.ObjectResult == null)
             {
                 return NotFound(establecimientoNuevo);
             }
-            else if (ModelState.IsValid)
+            else if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }

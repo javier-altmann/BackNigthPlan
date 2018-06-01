@@ -31,15 +31,16 @@ namespace Core.Services
         {
             try
             {
-                var response = @"{ ""IdsBarrios"": [5,6,7],""IdsGastronomia"":[1,2,3],""IdsCaracteristicas"":[4,2,1]
+                /*var response = @"{ ""IdsBarrios"": [5,6,7],""IdsGastronomia"":[1,2,3],""IdsCaracteristicas"":[4,2,1]
 								}";
+                                */
                 var estadoDeLasPreferencias = context.EstadoDePreferencias.Where(x => x.IdGrupo == preferenciasUsuario.IdGrupo)
                                       .FirstOrDefault();
                 var preferencias = new RespuestasUsuariosGrupos 
                 {
                     IdUsuario = preferenciasUsuario.IdUsuario,
                     IdGrupo = preferenciasUsuario.IdGrupo,
-                    Respuestas = response
+                    Respuestas = preferenciasUsuario.Respuesta
 
                 };
 

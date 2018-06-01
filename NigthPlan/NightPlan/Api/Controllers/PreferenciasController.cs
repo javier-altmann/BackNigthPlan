@@ -1,18 +1,22 @@
 using System.Collections.Generic;
 using Core.DTO;
+using Core.DTO.CrearGrupo;
 using Core.Interfaces;
+using Core.Services.ResponseModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
+    [Route("api/[controller]")]
     public class PreferenciasController : Controller
     {
-        IPreferenciasService _prefencias;
+
+        IPreferenciasService _preferencias;
         public PreferenciasController(IPreferenciasService preferencias)
         {
-            _prefencias = preferencias;
+            _preferencias = preferencias;
         }
-         
+
         /// <summary>
         /// Guarda las preferencias del usuario
         /// </summary>
@@ -22,8 +26,22 @@ namespace Api.Controllers
         [HttpPost]
         public IActionResult Post([FromBody]GuardarPreferenciasDTO preferenciasUsuario)
         {
-            return null;
+            var preferencias = _preferencias.GuardarPreferencias(preferenciasUsuario);
+            if (preferencias.ObjectResult == null)
+            {
+                return NotFound();
+            }
+            else if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+            return Created("", preferencias);
         }
-        
+
+
+
     }
+
 }
+
+

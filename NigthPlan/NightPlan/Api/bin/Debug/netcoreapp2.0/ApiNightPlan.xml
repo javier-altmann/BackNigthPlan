@@ -110,13 +110,6 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:Api.Controllers.ValuesController.Post(Core.DTO.CrearGrupo.GruposDTO)">
-            <summary>
-            Esto es un test
-            </summary>
-            <param name="Grupos"></param>
-            <returns></returns>
-        </member>
         <member name="M:Api.Controllers.VotacionController.Get(System.Int32)">
             <summary>
             Devuelve el resultado de la votacion

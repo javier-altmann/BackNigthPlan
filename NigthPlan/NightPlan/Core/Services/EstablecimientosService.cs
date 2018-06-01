@@ -21,7 +21,7 @@ namespace Core.Services
 
         public OperationResult<IEnumerable<EstablecimientoDestacadosDTO>> getEstablecimientosDestacados(int limit, int offset)
         {
-            var establecimientosDestacados = context.Establecimientos.Where(x => x.Destacado == 1)
+            var establecimientosDestacados = context.Establecimientos.Where(x => x.Destacado == true)
                                             .Select(y => new EstablecimientoDestacadosDTO
                                             {
                                                 IdEstablecimiento = y.IdEstablecimiento,
@@ -38,6 +38,8 @@ namespace Core.Services
             {
                 return operationResult;
             }
+            operationResult.ObjectResult = establecimientosDestacados;
+            
             return operationResult;
         }
 

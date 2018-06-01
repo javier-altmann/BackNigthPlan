@@ -17,7 +17,7 @@ namespace DAL.Model
         public string Nombre { get; set; }
         public string Direccion { get; set; }
         public string Imagen { get; set; }
-        public sbyte Destacado { get; set; }
+        public bool Destacado { get; set; }
 
         public ICollection<EstablecimientoBarrios> EstablecimientoBarrios { get; set; }
         public ICollection<EstablecimientoCaracteristicas> EstablecimientoCaracteristicas { get; set; }

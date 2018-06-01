@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Api.Controllers
 {
     [Route("api/[controller]")]
-    public class VotacionController
+    public class VotacionController : Controller
     {
         IVotacionService _votacion;
         public VotacionController(IVotacionService votacion)
@@ -22,7 +22,13 @@ namespace Api.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int idGrupo)
         {
-            return null;
+            var resultadoDeLaVotacion = _votacion.GetResultadoDeLaVotacion(idGrupo);
+            if(resultadoDeLaVotacion.ObjectResult == null){
+                return NotFound();
+            }else if(!ModelState.IsValid){
+                return BadRequest(ModelState);
+            }
+            return Ok(resultadoDeLaVotacion);
         }
 
         /// <summary>
@@ -34,7 +40,13 @@ namespace Api.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] VotacionDTO votacion)
         {
-            return null;
+            var voto = _votacion.GuardarVotacion(votacion);
+            if(voto.ObjectResult == null){
+                return NotFound();
+            }else if(!ModelState.IsValid){
+                return BadRequest(ModelState);
+            }
+            return Created("",voto);
         }
 
 

@@ -38,7 +38,7 @@ namespace Core.Services
                 return operationResult;
             }
             operationResult.ObjectResult = establecimientosDestacados;
-            
+
             return operationResult;
         }
 
@@ -71,88 +71,102 @@ namespace Core.Services
                 Nombre = x.Nombre
             }).ToList();
             return caracteristicas;
+
         }
 
+
+
+
+        public void AddEstablecimientosBarrios(IEnumerable<int> idsBarrios, int IdEstablecimiento)
+        {
+            var establecimientosBarrios = idsBarrios.Select(idBarrio => new EstablecimientoBarrios()
+            {
+                IdEstablecimiento = IdEstablecimiento,
+                IdBarrio = idBarrio
+            }).ToList();
+
+            context.EstablecimientoBarrios.AddRange(establecimientosBarrios);
+        }
+        /*  foreach (var item in listaCaracteristicas)
+                {
+                    EstablecimientoCaracteristicas establecimientoCaracteristica = new EstablecimientoCaracteristicas();
+
+                    establecimientoCaracteristica.IdEstablecimiento = datosDelEstablecimiento.IdEstablecimiento;
+                    establecimientoCaracteristica.IdCaracteristica = item;
+                    caracteristicas.Add(establecimientoCaracteristica);
+                }
+                */
+
+        public void AddEstablecimientosCaracteristicas(IEnumerable<int> idsCaracteristicas,int IdEstablecimiento)
+        {
+            var establecimientosCaracteristicas = idsCaracteristicas.Select(idsCaracteristica => new EstablecimientoCaracteristicas()
+            {
+                IdEstablecimiento = IdEstablecimiento,
+                IdCaracteristica = idsCaracteristica
+            }).ToList();
+
+            context.EstablecimientoCaracteristicas.AddRange(establecimientosCaracteristicas);
+        }
+
+        public void AddEstablecimientosGastronomia(IEnumerable<int> idsGastronomia, int IdEstablecimiento)
+        {
+            var establecimientosGastronomias = idsGastronomia.Select(idGastronomia => new EstablecimientosGastronomia()
+            {
+                IdEstablecimiento = IdEstablecimiento,
+                IdGastronomia = idGastronomia
+            }).ToList();
+
+            context.EstablecimientosGastronomia.AddRange(establecimientosGastronomias);
+        }
         public PostResult<CrearEstablecimientosDTO> CrearEstablecimientos(CrearEstablecimientosDTO establecimiento)
         {
 
-             try
+            try
             {
-            var datosDelEstablecimiento = new Establecimientos
-            {
-                Nombre = establecimiento.Establecimiento.Nombre,
-                Direccion = establecimiento.Establecimiento.Direccion,
-                Imagen = establecimiento.Establecimiento.Imagen,
-                Destacado = establecimiento.Establecimiento.Destacado
-            };
-            context.Establecimientos.Add(datosDelEstablecimiento);
-            
-            
-            var listaBarrios = establecimiento.Barrio.IdBarrio.ToList();
-            List<EstablecimientoBarrios> barrios = new List<EstablecimientoBarrios>();
-            
-            foreach (var item in listaBarrios)
-            {
-                EstablecimientoBarrios establecimientoBarrio = new EstablecimientoBarrios();
+                var datosDelEstablecimiento = new Establecimientos
+                {
+                    Nombre = establecimiento.Establecimiento.Nombre,
+                    Direccion = establecimiento.Establecimiento.Direccion,
+                    Imagen = establecimiento.Establecimiento.Imagen,
+                    Destacado = establecimiento.Establecimiento.Destacado
+                };
+                context.Establecimientos.Add(datosDelEstablecimiento);
 
-                establecimientoBarrio.IdEstablecimiento = datosDelEstablecimiento.IdEstablecimiento;
-                establecimientoBarrio.IdBarrio = item;
-                barrios.Add(establecimientoBarrio);
+                var listaBarrios = establecimiento.Barrio.IdBarrio.ToList();
+                
+                AddEstablecimientosBarrios(listaBarrios,datosDelEstablecimiento.IdEstablecimiento);
+
+                var listaGastronomia = establecimiento.Gastronomia.IdGastronomia.ToList();
+                
+                AddEstablecimientosGastronomia(listaGastronomia,datosDelEstablecimiento.IdEstablecimiento);
+
+                var listaCaracteristicas = establecimiento.Caracteristicas.IdCaracteristica.ToList();
+                AddEstablecimientosCaracteristicas(listaCaracteristicas,datosDelEstablecimiento.IdEstablecimiento);
+             
+                context.SaveChanges();
+                var responseEstablecimiento = new PostResult<CrearEstablecimientosDTO>
+                {
+                    ObjectResult = establecimiento,
+                };
+
+                return responseEstablecimiento;
             }
-            
-           
-
-            var listaCaracteristicas = establecimiento.Caracteristicas.IdCaracteristica.ToList();
-
-            List<EstablecimientoCaracteristicas> caracteristicas = new List<EstablecimientoCaracteristicas>();
-
-            foreach (var item in listaCaracteristicas)
+            catch (Exception ex)
             {
-                EstablecimientoCaracteristicas establecimientoCaracteristica = new EstablecimientoCaracteristicas();
-
-                establecimientoCaracteristica.IdEstablecimiento = datosDelEstablecimiento.IdEstablecimiento;
-                establecimientoCaracteristica.IdCaracteristica = item;
-                caracteristicas.Add(establecimientoCaracteristica);
-            }
-
-            
-            var listaGastronomia = establecimiento.Gastronomia.IdGastronomia.ToList();
-            List<EstablecimientosGastronomia> gastronomia = new List<EstablecimientosGastronomia>();
-            foreach (var item in listaGastronomia)
-            {
-                EstablecimientosGastronomia establecimientoGastronomia = new EstablecimientosGastronomia();
-
-                establecimientoGastronomia.IdEstablecimiento = datosDelEstablecimiento.IdEstablecimiento;
-                establecimientoGastronomia.IdGastronomia = item;
-                gastronomia.Add(establecimientoGastronomia);
+                var responseEstablecimiento = new PostResult<CrearEstablecimientosDTO>
+                {
+                    MensajePersonalizado = ex.Message
+                };
+                return responseEstablecimiento;
             }
 
-            context.EstablecimientoBarrios.AddRange(barrios);
-            context.EstablecimientosGastronomia.AddRange(gastronomia);
-            context.EstablecimientoCaracteristicas.AddRange(caracteristicas);
 
-            context.SaveChanges();
-            var responseEstablecimiento = new PostResult<CrearEstablecimientosDTO>
-            {
-                ObjectResult = establecimiento,
-            };
 
-            return responseEstablecimiento;
+
         }
-         catch (Exception ex)
-         {
-             var responseEstablecimiento = new PostResult<CrearEstablecimientosDTO>
-             {
-                 MensajePersonalizado = ex.Message
-             };
-             return responseEstablecimiento;
-         }
-        
+
+
+
 
     }
-
-
-
-
-}
 }

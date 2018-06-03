@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using DAL.Interfaces;
 using DAL.Model;
 using Core.DTO;
 using Core.DTO.CrearGrupo;

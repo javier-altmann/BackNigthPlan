@@ -74,10 +74,7 @@ namespace Core.Services
 
         }
 
-
-
-
-        public void AddEstablecimientosBarrios(IEnumerable<int> idsBarrios, int IdEstablecimiento)
+        private void AddEstablecimientosBarrios(IEnumerable<int> idsBarrios, int IdEstablecimiento)
         {
             var establecimientosBarrios = idsBarrios.Select(idBarrio => new EstablecimientoBarrios()
             {
@@ -87,17 +84,8 @@ namespace Core.Services
 
             context.EstablecimientoBarrios.AddRange(establecimientosBarrios);
         }
-        /*  foreach (var item in listaCaracteristicas)
-                {
-                    EstablecimientoCaracteristicas establecimientoCaracteristica = new EstablecimientoCaracteristicas();
 
-                    establecimientoCaracteristica.IdEstablecimiento = datosDelEstablecimiento.IdEstablecimiento;
-                    establecimientoCaracteristica.IdCaracteristica = item;
-                    caracteristicas.Add(establecimientoCaracteristica);
-                }
-                */
-
-        public void AddEstablecimientosCaracteristicas(IEnumerable<int> idsCaracteristicas,int IdEstablecimiento)
+        private void AddEstablecimientosCaracteristicas(IEnumerable<int> idsCaracteristicas, int IdEstablecimiento)
         {
             var establecimientosCaracteristicas = idsCaracteristicas.Select(idsCaracteristica => new EstablecimientoCaracteristicas()
             {
@@ -108,7 +96,7 @@ namespace Core.Services
             context.EstablecimientoCaracteristicas.AddRange(establecimientosCaracteristicas);
         }
 
-        public void AddEstablecimientosGastronomia(IEnumerable<int> idsGastronomia, int IdEstablecimiento)
+        private void AddEstablecimientosGastronomia(IEnumerable<int> idsGastronomia, int IdEstablecimiento)
         {
             var establecimientosGastronomias = idsGastronomia.Select(idGastronomia => new EstablecimientosGastronomia()
             {
@@ -133,16 +121,16 @@ namespace Core.Services
                 context.Establecimientos.Add(datosDelEstablecimiento);
 
                 var listaBarrios = establecimiento.Barrio.IdBarrio.ToList();
-                
-                AddEstablecimientosBarrios(listaBarrios,datosDelEstablecimiento.IdEstablecimiento);
+
+                AddEstablecimientosBarrios(listaBarrios, datosDelEstablecimiento.IdEstablecimiento);
 
                 var listaGastronomia = establecimiento.Gastronomia.IdGastronomia.ToList();
-                
-                AddEstablecimientosGastronomia(listaGastronomia,datosDelEstablecimiento.IdEstablecimiento);
+
+                AddEstablecimientosGastronomia(listaGastronomia, datosDelEstablecimiento.IdEstablecimiento);
 
                 var listaCaracteristicas = establecimiento.Caracteristicas.IdCaracteristica.ToList();
-                AddEstablecimientosCaracteristicas(listaCaracteristicas,datosDelEstablecimiento.IdEstablecimiento);
-             
+                AddEstablecimientosCaracteristicas(listaCaracteristicas, datosDelEstablecimiento.IdEstablecimiento);
+
                 context.SaveChanges();
                 var responseEstablecimiento = new PostResult<CrearEstablecimientosDTO>
                 {
@@ -160,13 +148,7 @@ namespace Core.Services
                 return responseEstablecimiento;
             }
 
-
-
-
         }
-
-
-
 
     }
 }
